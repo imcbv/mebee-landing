@@ -11,26 +11,97 @@ This is a Next.js TypeScript project for MeBee's marketing landing page. MeBee i
 - **Target Audience**: Global marketing teams at luxury/fashion, beauty, and consumer electronics companies
 - **Differentiator**: AI-native approach vs. legacy DAM systems that require manual metadata
 
-## Brand Guidelines
+## Design System & Brand Guidelines
 
-### Colors (from brand guide)
+### Core Design Philosophy
 
-- **Primary Yellow**: #F5FF00 (RGB 245, 255, 0)
-- **Navy Blue**: #435069 (RGB 67, 80, 105)
-- **Sage Green**: #93A5A0 (RGB 147, 165, 160)
-- **Dark Navy**: #252B48 (RGB 37, 43, 72)
+**Brand Identity**: "Minimal tech-luxe with an acid accent"
+- Quiet, orderly layouts in cool greys and deep navy
+- Single shock of neon yellow used as light, paint, and energy
+- Typography does the heavy lifting, decoration is structural and geometric
+- **Usage Ratios**: 70% neutrals, 25% sage surfaces, 5% neon accent
 
-### Typography
+### Color System (Designer Priority)
 
-- **Font**: Articulat CF (fallback to Inter/system fonts for web)
-- Strong, sharp, modern aesthetic
-- Use font-family: 'Articulat CF', 'Inter', sans-serif
+**Primary Colors**
+- **Acid Yellow**: #F5FF00 (RGB 245, 255, 0) → spotlight + accent (surfaces, borders, plates, frames). **AVOID for body text**
+- **Cool Navy**: #252B48 (RGB 37, 43, 72) → headings, body text on light surfaces
+- **Slate Blue-Grey**: #435069 (RGB 67, 80, 105) → secondary text/icons/buttons on neon backgrounds
+- **Muted Sage Grey**: #93A5A0 (RGB 147, 165, 160) → large surface blocks
+
+**Semantic Color Variables**
+```css
+:root {
+  /* MeBee Brand Colors */
+  --mb-yellow: #F5FF00;
+  --mb-navy: #252B48;
+  --mb-slate: #435069;
+  --mb-sage: #93A5A0;
+  
+  /* Usage Context */
+  --color-accent: var(--mb-yellow);
+  --color-primary: var(--mb-navy);
+  --color-secondary: var(--mb-slate);
+  --color-surface: var(--mb-sage);
+}
+```
+
+### Typography System
+
+**Font Family**: Articulat CF (geometric grotesk) with Inter fallback
+```css
+font-family: 'Articulat CF', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+```
+
+**Scale & Hierarchy**
+- **H1–H3**: Bold, big, airy, sentence-case
+- **Body Desktop**: 18px with neutral tracking
+- **Body Mobile**: 16px with neutral tracking
+- **Display**: Tight tracking for headlines
+- **Lists**: Tabular numerals
+
+**Responsive Typography**
+```css
+.hero-headline {
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: clamp(1.1, 1.2, 1.3);
+}
+```
+
+### Visual Elements & Decoration
+
+**Signature Elements**
+- **Liquid Skins**: Soft marbled texture for depth (low contrast, blurred)
+- **Honeycomb Motif**: Thin-stroke hexagon grid, corner watermark, subtle tint
+- **Neon Plates**: Rectangular neon blocks with oil-bubble textures, used sparingly
+
+**Decorative Balance Rules**
+- Only one "big effect" per viewport (neon flood, neon frame, or multiple plates)
+- Honeycomb only as corner watermark
+- Plates balance layout, placed top-right/bottom-left
+
+### Layout System
+
+**Grid & Spacing**
+- **12-column grid** with max width ~1280–1360px
+- **Wide gutters**: 80–120px desktop, 24–32px mobile
+- **Vertical rhythm**: 96–144px spacing between blocks
+- **8pt grid system** for consistent spacing
+
+**Container System**
+```css
+.container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 5vw, 7.5rem);
+}
+```
 
 ### Logo Usage
 
-- Standard logo: `/logos/mebee-logo.svg` (dark navy on light backgrounds)
-- Inverse logo: `/logos/mebee-logo-inverse.svg` (white on dark backgrounds)
-- Maintain proper contrast ratios for accessibility
+- **Standard logo**: `/logos/mebee-logo.svg` (dark navy on light backgrounds)
+- **Inverse logo**: `/logos/mebee-logo-inverse.svg` (white on dark backgrounds)
+- **Contrast requirements**: Maintain WCAG AA compliance (4.5:1 minimum)
 
 ## Landing Page Structure
 
@@ -105,12 +176,80 @@ This is a Next.js TypeScript project for MeBee's marketing landing page. MeBee i
 
 ### Design Requirements
 
-- **Mobile-first responsive design**
-- **Performance**: Lighthouse score >90 on mobile
-- **Accessibility**: WCAG AA compliance
-- **Modern aesthetic**: Clean, professional, premium feel
-- **Loading speed**: Optimized images and fonts
-- **Smooth animations**: Subtle, purposeful micro-interactions
+- **Mobile-first responsive design** with breakpoints: 1440/1200/1024/768/640px
+- **Performance**: Lighthouse score >90 on mobile, <3s load time
+- **Accessibility**: WCAG 2.1 AA compliance, 4.5:1 contrast ratios
+- **Modern aesthetic**: Minimal tech-luxe with geometric precision
+- **Loading speed**: Critical CSS inlining, optimized fonts, lazy loading
+- **Smooth animations**: 200-260ms ease-out timing, respect reduced motion
+
+### Component Design System
+
+**Button Variants**
+- **Primary**: Neon fill with navy text (hover → darken)
+- **Secondary**: Neon outline with navy fill on hover
+- **Ghost**: Transparent with hover → sage background
+- **Minimum size**: 44px height for touch targets
+
+```css
+.btn-primary {
+  background-color: var(--mb-yellow);
+  color: var(--mb-navy);
+  border: 2px solid var(--mb-yellow);
+  transition: all 0.2s ease-out;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 255, 0, 0.3);
+}
+```
+
+**Form Design**
+- **Input styling**: 2px border, rounded corners, focus → neon border
+- **Label positioning**: Above inputs, 14px size, medium weight
+- **Validation**: Error states with red indicators
+- **Progressive disclosure**: Multi-step for complex forms
+
+**Card Components**
+- **Default**: White background, subtle shadow, rounded corners
+- **Neon variant**: Yellow background for highlights
+- **Sage variant**: Muted background for secondary content
+- **Hover effects**: Subtle lift (2px translateY) with enhanced shadow
+
+### Animation & Motion System
+
+**Global Timing**: 200-260ms ease-out for all transitions
+
+**Menu Overlay Animation**
+1. Neon slab slides in from left
+2. Navigation items fade in with stagger
+3. Background overlay fades in
+
+**Micro-interactions**
+- **Chevron hover**: 4px rightward shift
+- **Button hover**: Subtle lift + enhanced shadow
+- **Section reveals**: Fade in up with intersection observer
+
+```css
+/* Motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Stagger animations */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 0.1s; }
+.stagger-item:nth-child(2) { animation-delay: 0.2s; }
+```
 
 ### Key Features to Implement
 
@@ -237,3 +376,64 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID=
 - **Current Fallback**: Inter, sans-serif
 - **Issue Fixed**: Removed manual head tag that caused 500 error
 - **Next Step**: Add Articulat CF font properly in CSS or through next/font
+
+## Design Principles Reference
+
+### Designer-Specific Guidelines (PRIORITY)
+
+**Core Aesthetic**: "Minimal tech-luxe with an acid accent"
+- Quiet, orderly layouts in cool greys and deep navy
+- Typography does the heavy lifting, decoration is structural/geometric
+- **Color Usage**: 70% neutrals, 25% sage surfaces, 5% neon accent
+- **Neon Rule**: Acid yellow #F5FF00 only for surfaces/borders/plates, NEVER body text
+
+**Layout Patterns from Designer**
+- **Header**: Logo left, Menu center-left, search right
+- **Hero Variants**: Neon flood OR framed (sage inset with neon border)
+- **Grid**: 12-col, max width ~1280-1360px, wide gutters (80-120px desktop)
+- **Spacing**: 96-144px between sections, 8pt grid system
+
+**Visual Elements**
+- **Liquid skins**: Marbled textures for depth (subtle, low contrast)
+- **Honeycomb**: Thin hexagon grid, corner watermark only
+- **Neon plates**: Oil-bubble texture blocks, balance layout top-right/bottom-left
+- **Rule**: Only one "big effect" per viewport
+
+### B2B SaaS Conversion Principles
+
+**Above-the-fold Requirements**
+- Value prop within first 50% viewport
+- Primary CTA visible without scrolling
+- F-pattern layout for eye movement
+- Progressive information disclosure
+
+**Component Design Standards**
+- **Buttons**: Min 44px height, neon primary with navy text
+- **Forms**: 2px borders, focus states with neon, progressive disclosure
+- **Cards**: Subtle shadows, hover lifts, neon/sage variants for hierarchy
+- **Typography**: 18px body desktop, 16px mobile, sentence-case headlines
+
+**Technical Requirements**
+- **Performance**: <3s load time, Lighthouse >90 mobile
+- **Accessibility**: WCAG 2.1 AA, 4.5:1 contrast ratios
+- **Animation**: 200-260ms ease-out, respect reduced motion
+- **Responsive**: Breakpoints 1440/1200/1024/768/640px
+
+### Implementation Checklist
+
+**Pre-Launch Must-Haves**
+- [ ] Mobile responsiveness across devices
+- [ ] Acid yellow used only for accents (never text)
+- [ ] 70/25/5 color ratio maintained
+- [ ] Typography hierarchy with Articulat CF
+- [ ] Honeycomb watermarks positioned correctly
+- [ ] Page load under 3 seconds
+- [ ] WCAG AA compliance verified
+
+**Conversion Optimization**
+- [ ] Value proposition above the fold
+- [ ] Social proof near CTAs
+- [ ] Progressive information architecture
+- [ ] Mobile-first button sizing (44px min)
+- [ ] Form field minimization
+- [ ] Clear next-step expectations
