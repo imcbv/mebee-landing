@@ -57,39 +57,83 @@ html {
   background-repeat: no-repeat;
 }
 
-/* Floating animations for geometric elements */
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0px) rotate(12deg); }
-  50% { transform: translateY(-10px) rotate(12deg); }
+/* Physics-based floating with bouncing - using multiple layered animations */
+@keyframes drift-x {
+  0%, 100% { transform: translateX(0px); }
+  25% { transform: translateX(-40px); }
+  50% { transform: translateX(35px); }
+  75% { transform: translateX(-25px); }
 }
 
-@keyframes float-slower {
-  0%, 100% { transform: translateY(0px) rotate(-6deg); }
-  50% { transform: translateY(-15px) rotate(-6deg); }
+@keyframes drift-y {
+  0%, 100% { transform: translateY(0px); }
+  33% { transform: translateY(-45px); }
+  66% { transform: translateY(30px); }
 }
 
-@keyframes float-slowest {
-  0%, 100% { transform: translateY(0px) rotate(45deg); }
-  50% { transform: translateY(-8px) rotate(45deg); }
+@keyframes bounce-x {
+  0%, 100% { transform: translateX(0px); }
+  25% { transform: translateX(20px); }
+  50% { transform: translateX(-15px); }
+  75% { transform: translateX(10px); }
 }
 
-.animate-float-slow {
-  animation: float-slow 6s ease-in-out infinite;
+@keyframes bounce-y {
+  0%, 100% { transform: translateY(0px); }
+  40% { transform: translateY(-25px); }
+  80% { transform: translateY(15px); }
 }
 
-.animate-float-slower {
-  animation: float-slower 8s ease-in-out infinite;
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-.animate-float-slowest {
-  animation: float-slowest 10s ease-in-out infinite;
+@keyframes wobble {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  50% { transform: rotate(-3deg); }
+  75% { transform: rotate(7deg); }
+}
+
+/* Combine multiple animations for complex floating behavior */
+.float-object-1 {
+  animation: 
+    drift-x 23s linear infinite,
+    drift-y 17s ease-in-out infinite,
+    wobble 7s ease-in-out infinite;
+}
+
+.float-object-2 {
+  animation: 
+    bounce-x 19s ease-in-out infinite,
+    bounce-y 13s linear infinite,
+    spin-slow 47s linear infinite;
+  animation-delay: 0s, 2s, 5s;
+}
+
+.float-object-3 {
+  animation: 
+    drift-x 29s ease-in-out infinite reverse,
+    bounce-y 21s ease-in-out infinite,
+    wobble 11s linear infinite;
+  animation-delay: 3s, 0s, 7s;
+}
+
+.float-object-4 {
+  animation: 
+    bounce-x 31s linear infinite reverse,
+    drift-y 25s ease-in-out infinite reverse,
+    spin-slow 53s linear infinite reverse;
+  animation-delay: 6s, 4s, 1s;
 }
 
 /* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  .animate-float-slow,
-  .animate-float-slower,
-  .animate-float-slowest {
+  .float-object-1,
+  .float-object-2,
+  .float-object-3,
+  .float-object-4 {
     animation: none;
   }
 }
