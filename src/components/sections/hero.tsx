@@ -14,8 +14,24 @@ export function Hero() {
         {/* Liquid skin texture */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-mebee-yellow/20 to-mebee-yellow/40 opacity-30"></div>
 
+        {/* Navy Honeycomb - BOTTOM LEFT BIG */}
+        <div 
+          className="absolute z-20 opacity-70"
+          style={{
+            bottom: '-150px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '500px',
+            height: '500px',
+            backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center'
+          }}
+        />
+
         {/* Logo */}
-        <div className="absolute top-8 left-8">
+        <div className="absolute top-8 left-8 z-10">
           <Image
             src={BRAND_ASSETS.logos.standard}
             alt="MeBee"
@@ -78,7 +94,7 @@ export function Hero() {
           className="absolute w-32 h-24 bg-mebee-yellow rounded-lg opacity-80 z-5"
           initial={{ x: 580, y: 20, rotate: 12 }}
           animate={{
-            x: [650, 600, 700, 630, 670, 650],
+            x: [580, 530, 630, 560, 610, 580],
             y: [20, 0, 60, 100, 10, 20],
             rotate: [12, 25, -5, 30, 8, 12],
           }}
@@ -91,9 +107,9 @@ export function Hero() {
 
         <motion.div
           className="absolute w-24 h-16 bg-mebee-yellow rounded-lg opacity-60 z-5"
-          initial={{ x: 620, y: 250, rotate: -6 }}
+          initial={{ x: 660, y: 250, rotate: -6 }}
           animate={{
-            x: [580, 530, 630, 550, 610, 580],
+            x: [660, 610, 710, 640, 690, 660],
             y: [250, 200, 300, 220, 280, 250],
             rotate: [-6, 15, -20, 10, -15, -6],
           }}
@@ -107,7 +123,7 @@ export function Hero() {
 
         <motion.div
           className="absolute w-20 h-20 bg-mebee-yellow/40 rounded-lg z-5"
-          initial={{ x: 700, y: 480, rotate: 45 }}
+          initial={{ x: 720, y: 480, rotate: 45 }}
           animate={{
             x: [720, 680, 760, 740, 700, 720],
             y: [480, 440, 520, 460, 500, 480],
@@ -123,9 +139,9 @@ export function Hero() {
 
         <motion.div
           className="absolute w-16 h-24 bg-mebee-yellow rounded-lg opacity-50 z-5"
-          initial={{ x: 650, y: 700, rotate: -12 }}
+          initial={{ x: 630, y: 700, rotate: -12 }}
           animate={{
-            x: [800, 840, 760, 820, 780, 800],
+            x: [630, 670, 590, 650, 610, 630],
             y: [700, 660, 740, 680, 720, 700],
             rotate: [-12, 20, -25, 15, -8, -12],
           }}
@@ -140,12 +156,16 @@ export function Hero() {
         {/* Main content */}
         <div className="relative flex items-center justify-center min-h-screen px-12 z-10">
           <div className="text-center max-w-4xl">
-            {/* Bee Icon */}
+            {/* MeBee Logo Icon - MUCH BIGGER */}
             <div className="mb-8">
-              <div className="w-16 h-16 bg-mebee-yellow rounded-full flex items-center justify-center mx-auto">
-                <span className="text-mebee-dark-navy text-2xl font-bold">
-                  &
-                </span>
+              <div className="w-32 h-32 bg-mebee-yellow rounded-full flex items-center justify-center mx-auto">
+                <Image
+                  src={BRAND_ASSETS.logos.standard}
+                  alt="MeBee"
+                  width={160}
+                  height={160}
+                  className="w-40 h-40"
+                />
               </div>
             </div>
 
