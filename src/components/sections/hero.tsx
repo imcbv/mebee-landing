@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "../ui/button";
 import { COPY, BRAND_ASSETS } from "../../lib/constants";
 
@@ -26,7 +26,15 @@ function useTypewriter(text: string, speed: number = 50) {
 }
 
 export function Hero() {
-  // Typewriter effect for headline
+  const { scrollY } = useScroll();
+  
+  // Parallax transforms - floating objects move MUCH more for noticeable effect
+  const honeycombY = useTransform(scrollY, [0, 800], [0, -150]);
+  const logoY = useTransform(scrollY, [0, 800], [0, -50]);
+  const contentY = useTransform(scrollY, [0, 800], [0, -100]);
+  const floatingObjectsY = useTransform(scrollY, [0, 800], [0, -300]);
+  
+  // Typewriter effect starting immediately
   const typedHeadline = useTypewriter(COPY.hero.headline, 60);
 
   return (
@@ -36,7 +44,7 @@ export function Hero() {
         {/* Liquid skin texture */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-mebee-yellow/20 to-mebee-yellow/40 opacity-30"></div>
 
-        {/* Navy Honeycomb with elegant fade in */}
+        {/* Navy Honeycomb with elegant fade in and parallax */}
         <motion.div 
           className="absolute z-20 opacity-70"
           style={{ 
@@ -48,16 +56,18 @@ export function Hero() {
             backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center'
+            backgroundPosition: 'center',
+            y: honeycombY
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.7 }}
           transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
         />
 
-        {/* Logo with elegant fade in */}
+        {/* Logo with elegant fade in and parallax */}
         <motion.div 
           className="absolute top-8 left-8 z-10"
+          style={{ y: logoY }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
@@ -119,7 +129,11 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Four floating objects on the FAR RIGHT SIDE - MAXIMUM vertical spread */}
+        {/* Four floating objects with parallax */}
+        <motion.div 
+          style={{ y: floatingObjectsY }}
+          className="absolute inset-0"
+        >
         <motion.div
           className="absolute w-32 h-24 bg-mebee-yellow rounded-lg opacity-80 z-5"
           initial={{ x: 580, y: 20, rotate: 12 }}
@@ -182,9 +196,13 @@ export function Hero() {
             delay: 9,
           }}
         />
+        </motion.div>
 
-        {/* Main content with elegant animations */}
-        <div className="relative flex items-center justify-center min-h-screen px-12 z-10">
+        {/* Main content with elegant animations and parallax */}
+        <motion.div 
+          className="relative flex items-center justify-center min-h-screen px-12 z-10"
+          style={{ y: contentY }}
+        >
           <div className="text-center max-w-4xl">
             {/* MeBee Logo Icon with elegant fade */}
             <motion.div 
@@ -204,13 +222,8 @@ export function Hero() {
               </div>
             </motion.div>
 
-            {/* Typewriter headline with cursor */}
-            <motion.h1 
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-mebee-dark-navy leading-tight mb-8 font-articulat"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-            >
+            {/* Typewriter headline with fixed height to prevent layout shift */}
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-mebee-dark-navy leading-tight mb-8 font-articulat min-h-[12rem] md:min-h-[14rem] lg:min-h-[16rem]">
               {typedHeadline}
               <motion.span
                 className="text-mebee-yellow"
@@ -219,7 +232,7 @@ export function Hero() {
               >
                 |
               </motion.span>
-            </motion.h1>
+            </h1>
             
             <motion.h2 
               className="text-xl md:text-2xl text-mebee-dark-navy leading-relaxed mb-12 max-w-3xl mx-auto"
@@ -255,7 +268,7 @@ export function Hero() {
               </p>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
