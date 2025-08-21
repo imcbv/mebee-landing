@@ -1,23 +1,45 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { COPY, BRAND_ASSETS } from "../../lib/constants";
 
+// Typewriter hook
+function useTypewriter(text: string, speed: number = 50) {
+  const [displayText, setDisplayText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + text[currentIndex]);
+        setCurrentIndex(currentIndex + 1);
+      }, speed);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, text, speed]);
+
+  return displayText;
+}
+
 export function Hero() {
+  // Typewriter effect for headline
+  const typedHeadline = useTypewriter(COPY.hero.headline, 60);
+
   return (
-    <section className="relative min-h-screen flex">
+    <section className="relative min-h-screen flex overflow-hidden">
       {/* LEFT SIDE - Yellow Slab (~25%) */}
       <div className="w-1/4 bg-mebee-yellow relative">
         {/* Liquid skin texture */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-mebee-yellow/20 to-mebee-yellow/40 opacity-30"></div>
 
-        {/* Navy Honeycomb - BOTTOM LEFT BIG */}
-        <div 
+        {/* Navy Honeycomb with elegant fade in */}
+        <motion.div 
           className="absolute z-20 opacity-70"
-          style={{
+          style={{ 
             bottom: '-150px',
             left: '50%',
             transform: 'translateX(-50%)',
@@ -28,10 +50,18 @@ export function Hero() {
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center'
           }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.7 }}
+          transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
         />
 
-        {/* Logo */}
-        <div className="absolute top-8 left-8 z-10">
+        {/* Logo with elegant fade in */}
+        <motion.div 
+          className="absolute top-8 left-8 z-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+        >
           <Image
             src={BRAND_ASSETS.logos.standard}
             alt="MeBee"
@@ -39,7 +69,7 @@ export function Hero() {
             height={40}
             className="h-8 w-auto"
           />
-        </div>
+        </motion.div>
       </div>
 
       {/* RIGHT SIDE - Sage Content Area (~75%) */}
@@ -153,11 +183,16 @@ export function Hero() {
           }}
         />
 
-        {/* Main content */}
+        {/* Main content with elegant animations */}
         <div className="relative flex items-center justify-center min-h-screen px-12 z-10">
           <div className="text-center max-w-4xl">
-            {/* MeBee Logo Icon - MUCH BIGGER */}
-            <div className="mb-8">
+            {/* MeBee Logo Icon with elegant fade */}
+            <motion.div 
+              className="mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            >
               <div className="w-32 h-32 bg-mebee-yellow rounded-full flex items-center justify-center mx-auto">
                 <Image
                   src={BRAND_ASSETS.logos.standard}
@@ -167,29 +202,58 @@ export function Hero() {
                   className="w-40 h-40"
                 />
               </div>
-            </div>
+            </motion.div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-mebee-dark-navy leading-tight mb-8 font-articulat">
-              {COPY.hero.headline}
-            </h1>
-
-            <h2 className="text-xl md:text-2xl text-mebee-dark-navy leading-relaxed mb-12 max-w-3xl mx-auto">
-              {COPY.hero.subheadline}
-            </h2>
-
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-mebee-yellow text-mebee-yellow hover:bg-mebee-yellow hover:text-mebee-dark-navy font-semibold px-8 py-4 rounded-full text-lg min-h-[44px] transition-all duration-200"
+            {/* Typewriter headline with cursor */}
+            <motion.h1 
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-mebee-dark-navy leading-tight mb-8 font-articulat"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
             >
-              {COPY.hero.cta}
-            </Button>
+              {typedHeadline}
+              <motion.span
+                className="text-mebee-yellow"
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ duration: 1, repeat: Infinity }}
+              >
+                |
+              </motion.span>
+            </motion.h1>
+            
+            <motion.h2 
+              className="text-xl md:text-2xl text-mebee-dark-navy leading-relaxed mb-12 max-w-3xl mx-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
+            >
+              {COPY.hero.subheadline}
+            </motion.h2>
+            
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.4, ease: "easeOut" }}
+            >
+              <Button 
+                variant="outline"
+                size="lg" 
+                className="border-2 border-mebee-yellow text-mebee-yellow hover:bg-mebee-yellow hover:text-mebee-dark-navy font-semibold px-8 py-4 rounded-full text-lg min-h-[44px] transition-all duration-200"
+              >
+                {COPY.hero.cta}
+              </Button>
+            </motion.div>
 
-            <div className="mt-12">
+            <motion.div 
+              className="mt-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.6, ease: "easeOut" }}
+            >
               <p className="text-mebee-dark-navy text-sm">
                 {COPY.hero.trustSignal}
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
