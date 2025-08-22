@@ -3,7 +3,13 @@ import { COPY } from '../../lib/constants';
 
 export function Audience() {
   return (
-    <section className="relative py-24 bg-mebee-sage">
+    <section id="audience" className="relative py-24 flex">
+      {/* LEFT SIDE - Yellow Slab (nav bar width) */}
+      <div className="w-20 bg-mebee-yellow relative">
+      </div>
+
+      {/* RIGHT SIDE - Main Content */}
+      <div className="flex-1 bg-mebee-sage relative">
       {/* Honeycomb Watermark - Corner Only */}
       <div className="absolute bottom-8 left-8 opacity-20">
         <svg width="120" height="120" viewBox="0 0 120 120" className="text-mebee-dark-navy">
@@ -59,6 +65,7 @@ export function Audience() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

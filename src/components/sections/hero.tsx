@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "../ui/button";
+import { NavigationSlab } from "../ui/navigation-slab";
 import { COPY, BRAND_ASSETS } from "../../lib/constants";
 
 // Typewriter hook
@@ -38,9 +39,10 @@ export function Hero() {
   const typedHeadline = useTypewriter(COPY.hero.headline, 60);
 
   return (
-    <section className="relative min-h-screen flex overflow-hidden">
-      {/* LEFT SIDE - Yellow Slab (~25%) */}
-      <div className="w-1/4 bg-mebee-yellow relative">
+    <section id="hero" className="relative min-h-screen flex overflow-hidden">
+      <NavigationSlab />
+      {/* LEFT SIDE - Yellow Slab (nav bar width) */}
+      <div className="w-20 bg-mebee-yellow relative">
         {/* Liquid skin texture */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-mebee-yellow/20 to-mebee-yellow/40 opacity-30"></div>
 
@@ -82,8 +84,8 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* RIGHT SIDE - Sage Content Area (~75%) */}
-      <div className="w-3/4 bg-mebee-sage relative overflow-hidden">
+      {/* RIGHT SIDE - Sage Content Area */}
+      <div className="flex-1 bg-mebee-sage relative overflow-hidden">
         {/* Motivational office background image (low opacity) */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-600 to-gray-800"></div>

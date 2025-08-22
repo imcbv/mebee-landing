@@ -13,7 +13,13 @@ export function Solutions() {
   const floatingObjectsY = useTransform(scrollY, [0, 2000], [0, -150]);
 
   return (
-    <section className="relative py-32 bg-mebee-sage overflow-visible">
+    <section id="solutions" className="relative py-32 overflow-visible flex">
+      {/* LEFT SIDE - Yellow Slab (nav bar width) */}
+      <div className="w-20 bg-mebee-yellow relative">
+      </div>
+
+      {/* RIGHT SIDE - Main Content */}
+      <div className="flex-1 bg-mebee-sage relative overflow-visible">
       {/* White Honeycomb Watermark */}
       <motion.div
         className="absolute z-5"
@@ -309,6 +315,7 @@ export function Solutions() {
           </div>
         </div>
       </motion.div>
+      </div>
     </section>
   );
 }

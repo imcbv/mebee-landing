@@ -141,8 +141,14 @@ export function Problems() {
   const config = backgroundConfigs[backgroundOption];
 
   return (
-    <section className={config.sectionClass.replace("py-24", "pt-24 pb-0")}>
-      {config.gradients}
+    <section id="problems" className={`${config.sectionClass.replace("py-24", "pt-24 pb-0")} flex`}>
+      {/* LEFT SIDE - Yellow Slab (nav bar width) */}
+      <div className="w-20 bg-mebee-yellow relative">
+      </div>
+
+      {/* RIGHT SIDE - Main Content */}
+      <div className="flex-1 relative" style={{ backgroundColor: config.sectionClass.includes('bg-mebee-sage') ? '#93A5A0' : config.sectionClass.includes('bg-mebee-navy') ? '#435069' : config.sectionClass.includes('bg-mebee-dark-navy') ? '#252B48' : config.sectionClass.includes('gradient') ? '' : '#ffffff' }}>
+        {config.gradients}
 
       {/* White Honeycomb Watermark - Repeating Hero Pattern */}
       <motion.div
@@ -393,6 +399,7 @@ export function Problems() {
           </div>
         </motion.div>
       </motion.div>
+      </div>
     </section>
   );
 }

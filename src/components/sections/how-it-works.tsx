@@ -4,7 +4,13 @@ import { COPY } from '../../lib/constants';
 
 export function HowItWorks() {
   return (
-    <section className="relative py-24 bg-white">
+    <section id="how-it-works" className="relative py-24 flex">
+      {/* LEFT SIDE - Yellow Slab (nav bar width) */}
+      <div className="w-20 bg-mebee-yellow relative">
+      </div>
+
+      {/* RIGHT SIDE - Main Content */}
+      <div className="flex-1 bg-white relative">
       {/* Subtle Liquid Skin Texture Background */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-gradient-to-br from-mebee-sage/20 via-transparent to-mebee-navy/10"></div>
@@ -53,6 +59,7 @@ export function HowItWorks() {
             {COPY.howItWorks.cta}
           </Button>
         </div>
+      </div>
       </div>
     </section>
   );
