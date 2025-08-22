@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '../ui/button';
 import { COPY } from '../../lib/constants';
@@ -8,6 +8,12 @@ import { COPY } from '../../lib/constants';
 export function Problems() {
   // State to cycle through different backgrounds
   const [backgroundOption, setBackgroundOption] = useState(3); // Default to dark navy
+  const [isClient, setIsClient] = useState(false);
+  
+  // Client-side only to prevent hydration mismatch
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   
   // Parallax transforms matching hero section
   const { scrollY } = useScroll();
@@ -68,9 +74,7 @@ export function Problems() {
       sectionClass: "relative py-24 bg-mebee-dark-navy overflow-hidden",
       gradients: (
         <div className="absolute inset-0">
-          {/* NO GRADIENTS - Solid colors only */}
-          <div className="w-16 bg-mebee-yellow/15 h-full absolute left-0" />
-          <div className="w-16 bg-mebee-yellow/15 h-full absolute right-0" />
+          {/* NO GRADIENTS - Solid colors only, NO SIDE STRIPES */}
         </div>
       ),
       floatingColors: ["bg-mebee-yellow/40", "bg-mebee-yellow/30", "bg-mebee-yellow/50"],
@@ -125,7 +129,7 @@ export function Problems() {
 
       {/* White Honeycomb Watermark - Repeating Hero Pattern */}
       <motion.div 
-        className="absolute opacity-20 z-5"
+        className="absolute z-5"
         style={{ 
           top: '10%',
           right: '5%',
@@ -138,7 +142,7 @@ export function Problems() {
           y: honeycombY
         }}
         initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 0.2, scale: 1 }}
+        whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
       />
@@ -274,12 +278,59 @@ export function Problems() {
 
         {/* Solution Teaser - Clean Centered */}
         <motion.div 
-          className="text-center bg-mebee-sage/10 rounded-2xl p-12 md:p-16 relative"
+          className="text-center bg-mebee-sage/10 rounded-2xl p-12 md:p-16 relative overflow-visible"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
           viewport={{ once: true }}
         >
+          {/* White Honeycomb - Visible Always */}
+          <div 
+            className="absolute z-10"
+            style={{ 
+              top: '-90px',
+              left: '20%',
+              width: '300px',
+              height: '300px',
+              backgroundImage: 'url("/images/MeBee Honeycomb_white.png")',
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+            }}
+          />
+
+          {/* Floating Blocks on Right Side - With Parallax */}
+          <motion.div
+            className="absolute w-16 h-12 bg-white/15 rounded-lg z-5"
+            style={{ top: '30%', right: '8%' }}
+            animate={{
+              x: [0, 15, -10, 12, 0],
+              y: [0, -10, 20, -5, 0],
+              rotate: [0, 8, -5, 10, 0],
+            }}
+            transition={{
+              duration: 18,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2,
+            }}
+          />
+          
+          <motion.div
+            className="absolute w-12 h-16 bg-white/20 rounded-lg z-5"
+            style={{ bottom: '25%', right: '12%' }}
+            animate={{
+              x: [0, -12, 18, -8, 0],
+              y: [0, 15, -25, 10, 0],
+              rotate: [0, -12, 15, -8, 0],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 5,
+            }}
+          />
           <h3 className={`text-4xl md:text-5xl font-bold ${config.textColors.main} mb-8 leading-tight font-articulat`}>
             What if you could
             <span className={`block ${config.textColors.yellow}`}>eliminate all three</span>
@@ -302,7 +353,7 @@ export function Problems() {
             <Button 
               variant="outline" 
               size="lg"
-              className="border-2 border-mebee-navy text-mebee-navy hover:bg-mebee-navy hover:text-white font-semibold px-8 py-4 text-lg min-h-[44px] transition-all duration-200"
+              className="border-2 border-white text-white hover:bg-white hover:text-mebee-dark-navy font-semibold px-8 py-4 text-lg min-h-[44px] transition-all duration-200"
             >
               {COPY.problems.secondaryCta}
             </Button>
