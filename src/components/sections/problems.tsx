@@ -1,79 +1,169 @@
+"use client";
+
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Button } from '../ui/button';
 import { COPY } from '../../lib/constants';
 
 export function Problems() {
   return (
-    <section className="relative py-24 bg-white">
-      {/* Sage Side Panels for Breathing Room */}
+    <section className="relative py-24 bg-white overflow-hidden">
+      {/* Sage Gradient Transitions */}
       <div className="absolute inset-0">
+        {/* Top gradient from sage */}
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-mebee-sage to-transparent opacity-30" />
+        {/* Bottom gradient to sage */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-mebee-sage/20 to-transparent" />
+        {/* Side panels for breathing room */}
         <div className="w-16 bg-mebee-sage/10 h-full absolute left-0" />
         <div className="w-16 bg-mebee-sage/10 h-full absolute right-0" />
       </div>
 
-      {/* Honeycomb Watermark - Corner Only */}
-      <div className="absolute top-8 right-8 opacity-20">
-        <svg width="120" height="120" viewBox="0 0 120 120" className="text-mebee-sage">
-          <defs>
-            <pattern id="honeycomb" patternUnits="userSpaceOnUse" width="40" height="35">
-              <polygon fill="none" stroke="currentColor" strokeWidth="1" points="20,2 35,10 35,25 20,33 5,25 5,10"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#honeycomb)" />
-        </svg>
-      </div>
+      {/* Navy Honeycomb Watermark - Actual Image */}
+      <motion.div 
+        className="absolute top-8 right-8 opacity-15 z-5"
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 0.15, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+      >
+        <div 
+          className="w-40 h-40"
+          style={{
+            backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center'
+          }}
+        />
+      </motion.div>
+
+      {/* Floating Sage Geometric Elements */}
+      <motion.div
+        className="absolute w-24 h-16 bg-mebee-sage/20 rounded-lg z-5"
+        style={{ top: '15%', left: '8%' }}
+        animate={{
+          x: [0, 20, -10, 15, 0],
+          y: [0, -15, 25, -5, 0],
+          rotate: [0, 5, -3, 8, 0],
+        }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      
+      <motion.div
+        className="absolute w-16 h-20 bg-mebee-sage/15 rounded-lg z-5"
+        style={{ top: '60%', right: '12%' }}
+        animate={{
+          x: [0, -25, 15, -10, 0],
+          y: [0, 20, -30, 10, 0],
+          rotate: [0, -8, 12, -4, 0],
+        }}
+        transition={{
+          duration: 30,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 5,
+        }}
+      />
+
+      <motion.div
+        className="absolute w-20 h-12 bg-mebee-sage/25 rounded-lg z-5"
+        style={{ bottom: '20%', left: '15%' }}
+        animate={{
+          x: [0, 30, -20, 25, 0],
+          y: [0, -25, 35, -15, 0],
+          rotate: [0, 10, -15, 6, 0],
+        }}
+        transition={{
+          duration: 28,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 8,
+        }}
+      />
 
       <div className="max-w-6xl mx-auto px-8 relative">
         {/* Section Header - Typography Focused */}
-        <div className="text-center mb-20">
+        <motion.div 
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-mebee-dark-navy leading-tight mb-6 font-articulat">
             Stop
-            <span className="block text-mebee-yellow">delays</span>
-            <span className="block text-mebee-navy">Start launches</span>
+            <motion.span 
+              className="block text-mebee-yellow"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              delays
+            </motion.span>
+            <motion.span 
+              className="block text-mebee-navy"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              Start launches
+            </motion.span>
           </h2>
-        </div>
+        </motion.div>
 
-        {/* Problems List - Clean Structure */}
+        {/* Problems List - Clean Structure with Staggered Animations */}
         <div className="max-w-4xl mx-auto space-y-16 mb-20">
-          <div className="relative">
-            <div className="absolute -left-6 top-0 w-1 h-full bg-mebee-yellow" />
-            <div className="pl-12">
-              <h3 className="text-2xl md:text-3xl font-semibold text-mebee-dark-navy mb-4 font-articulat">
-                {COPY.problems.painPoints[0].title}
-              </h3>
-              <p className="text-lg text-mebee-navy/80 leading-relaxed">
-                {COPY.problems.painPoints[0].description}
-              </p>
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="absolute -left-6 top-0 w-1 h-full bg-mebee-yellow" />
-            <div className="pl-12">
-              <h3 className="text-2xl md:text-3xl font-semibold text-mebee-dark-navy mb-4 font-articulat">
-                {COPY.problems.painPoints[1].title}
-              </h3>
-              <p className="text-lg text-mebee-navy/80 leading-relaxed">
-                {COPY.problems.painPoints[1].description}
-              </p>
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="absolute -left-6 top-0 w-1 h-full bg-mebee-yellow" />
-            <div className="pl-12">
-              <h3 className="text-2xl md:text-3xl font-semibold text-mebee-dark-navy mb-4 font-articulat">
-                {COPY.problems.painPoints[2].title}
-              </h3>
-              <p className="text-lg text-mebee-navy/80 leading-relaxed">
-                {COPY.problems.painPoints[2].description}
-              </p>
-            </div>
-          </div>
+          {COPY.problems.painPoints.map((painPoint, index) => (
+            <motion.div 
+              key={index}
+              className="relative"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ 
+                duration: 0.7, 
+                delay: index * 0.2,
+                ease: "easeOut" 
+              }}
+              viewport={{ once: true }}
+            >
+              <motion.div 
+                className="absolute -left-6 top-0 w-1 bg-mebee-yellow"
+                initial={{ height: 0 }}
+                whileInView={{ height: '100%' }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: (index * 0.2) + 0.3,
+                  ease: "easeOut" 
+                }}
+                viewport={{ once: true }}
+              />
+              <div className="pl-12">
+                <h3 className="text-2xl md:text-3xl font-semibold text-mebee-dark-navy mb-4 font-articulat">
+                  {painPoint.title}
+                </h3>
+                <p className="text-lg text-mebee-navy/80 leading-relaxed">
+                  {painPoint.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
         {/* Solution Teaser - Clean Centered */}
-        <div className="text-center bg-mebee-sage/10 rounded-2xl p-12 md:p-16 relative">
+        <motion.div 
+          className="text-center bg-mebee-sage/10 rounded-2xl p-12 md:p-16 relative"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+          viewport={{ once: true }}
+        >
           <h3 className="text-4xl md:text-5xl font-bold text-mebee-dark-navy mb-8 leading-tight font-articulat">
             What if you could
             <span className="block text-mebee-yellow">eliminate all three</span>
@@ -101,7 +191,7 @@ export function Problems() {
               {COPY.problems.secondaryCta}
             </Button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,5 +1,5 @@
 import { Hero } from '@/components/sections/hero';
-import { Problems } from '@/components/sections/problems';
+import { Problems } from '@/components/sections/problems-variations';
 import { Solutions } from '@/components/sections/solutions';
 import { HowItWorks } from '@/components/sections/how-it-works';
 import { Audience } from '@/components/sections/audience';
