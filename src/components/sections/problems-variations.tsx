@@ -1,13 +1,19 @@
 "use client";
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '../ui/button';
 import { COPY } from '../../lib/constants';
 
 export function Problems() {
   // State to cycle through different backgrounds
-  const [backgroundOption, setBackgroundOption] = useState(1);
+  const [backgroundOption, setBackgroundOption] = useState(3); // Default to dark navy
+  
+  // Parallax transforms matching hero section
+  const { scrollY } = useScroll();
+  const honeycombY = useTransform(scrollY, [0, 800], [0, -150]);
+  const contentY = useTransform(scrollY, [0, 800], [0, -100]);
+  const floatingObjectsY = useTransform(scrollY, [0, 800], [0, -300]);
   
   const backgroundNames = {
     1: "Light Sage",
@@ -62,8 +68,7 @@ export function Problems() {
       sectionClass: "relative py-24 bg-mebee-dark-navy overflow-hidden",
       gradients: (
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-mebee-sage to-mebee-dark-navy opacity-80" />
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-mebee-sage/20 to-transparent" />
+          {/* NO GRADIENTS - Solid colors only */}
           <div className="w-16 bg-mebee-yellow/15 h-full absolute left-0" />
           <div className="w-16 bg-mebee-yellow/15 h-full absolute right-0" />
         </div>
@@ -71,9 +76,9 @@ export function Problems() {
       floatingColors: ["bg-mebee-yellow/40", "bg-mebee-yellow/30", "bg-mebee-yellow/50"],
       textColors: {
         main: "text-white",
-        yellow: "text-mebee-yellow",
-        navy: "text-mebee-sage",
-        description: "text-white/90"
+        yellow: "text-mebee-yellow", 
+        navy: "text-white",
+        description: "text-white"
       }
     },
     4: {
@@ -116,86 +121,88 @@ export function Problems() {
 
   return (
     <section className={config.sectionClass}>
-      {/* Background Cycle Button - Fixed Position */}
-      <motion.button
-        onClick={cycleBackground}
-        className="fixed top-4 right-4 z-50 bg-mebee-yellow text-mebee-dark-navy px-4 py-2 rounded-lg font-semibold text-sm shadow-lg hover:bg-mebee-yellow/90 transition-all duration-200"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        BG: {backgroundNames[backgroundOption]} ({backgroundOption}/5)
-      </motion.button>
-
       {config.gradients}
 
-      {/* Navy Honeycomb Watermark - Actual Image */}
+      {/* White Honeycomb Watermark - Repeating Hero Pattern */}
       <motion.div 
-        className="absolute top-8 right-8 opacity-15 z-5"
+        className="absolute opacity-20 z-5"
+        style={{ 
+          top: '10%',
+          right: '5%',
+          width: '400px',
+          height: '400px',
+          backgroundImage: 'url("/images/MeBee Honeycomb_white.png")',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          y: honeycombY
+        }}
         initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 0.15, scale: 1 }}
+        whileInView={{ opacity: 0.2, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
+      />
+
+      {/* 3 Floating Objects - Different Shapes, More Spaced Vertically */}
+      <motion.div 
+        style={{ y: floatingObjectsY }}
+        className="absolute inset-0"
       >
-        <div 
-          className="w-40 h-40"
-          style={{
-            backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center'
+        {/* Top - Medium Square */}
+        <motion.div
+          className={`absolute w-26 h-26 ${config.floatingColors[0]} rounded-lg opacity-70 z-5`}
+          initial={{ x: 100, y: 120, rotate: 12 }}
+          animate={{
+            x: [100, 50, 150, 80, 130, 100],
+            y: [120, 100, 160, 200, 110, 120],
+            rotate: [12, 27, -8, 35, 15, 12],
+          }}
+          transition={{
+            duration: 19,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Middle - Tall Rectangle */}
+        <motion.div
+          className={`absolute w-18 h-32 ${config.floatingColors[1]} rounded-lg opacity-60 z-5`}
+          initial={{ x: 180, y: 400, rotate: -15 }}
+          animate={{
+            x: [180, 130, 230, 160, 210, 180],
+            y: [400, 360, 440, 380, 420, 400],
+            rotate: [-15, 20, -25, 18, -12, -15],
+          }}
+          transition={{
+            duration: 24,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 4,
+          }}
+        />
+
+        {/* Bottom - Wide Rectangle */}
+        <motion.div
+          className={`absolute w-34 h-20 ${config.floatingColors[2]} rounded-lg opacity-50 z-5`}
+          initial={{ x: 80, y: 680, rotate: 8 }}
+          animate={{
+            x: [80, 40, 120, 100, 60, 80],
+            y: [680, 640, 720, 660, 700, 680],
+            rotate: [8, 30, -12, 25, 5, 8],
+          }}
+          transition={{
+            duration: 21,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 8,
           }}
         />
       </motion.div>
 
-      {/* Floating Geometric Elements */}
-      <motion.div
-        className={`absolute w-24 h-16 ${config.floatingColors[0]} rounded-lg z-5`}
-        style={{ top: '15%', left: '8%' }}
-        animate={{
-          x: [0, 20, -10, 15, 0],
-          y: [0, -15, 25, -5, 0],
-          rotate: [0, 5, -3, 8, 0],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      
-      <motion.div
-        className={`absolute w-16 h-20 ${config.floatingColors[1]} rounded-lg z-5`}
-        style={{ top: '60%', right: '12%' }}
-        animate={{
-          x: [0, -25, 15, -10, 0],
-          y: [0, 20, -30, 10, 0],
-          rotate: [0, -8, 12, -4, 0],
-        }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 5,
-        }}
-      />
-
-      <motion.div
-        className={`absolute w-20 h-12 ${config.floatingColors[2]} rounded-lg z-5`}
-        style={{ bottom: '20%', left: '15%' }}
-        animate={{
-          x: [0, 30, -20, 25, 0],
-          y: [0, -25, 35, -15, 0],
-          rotate: [0, 10, -15, 6, 0],
-        }}
-        transition={{
-          duration: 28,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 8,
-        }}
-      />
-
-      <div className="max-w-6xl mx-auto px-8 relative">
+      <motion.div 
+        className="max-w-6xl mx-auto px-8 relative"
+        style={{ y: contentY }}
+      >
         {/* Section Header - Typography Focused */}
         <motion.div 
           className="text-center mb-20"
@@ -301,7 +308,7 @@ export function Problems() {
             </Button>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
