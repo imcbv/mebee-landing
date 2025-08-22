@@ -1,36 +1,36 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Button } from '../ui/button';
-import { COPY } from '../../lib/constants';
+import React, { useState, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Button } from "../ui/button";
+import { COPY } from "../../lib/constants";
 
 export function Problems() {
   // State to cycle through different backgrounds
   const [backgroundOption, setBackgroundOption] = useState(3); // Default to dark navy
   const [isClient, setIsClient] = useState(false);
-  
+
   // Client-side only to prevent hydration mismatch
   useEffect(() => {
     setIsClient(true);
   }, []);
-  
+
   // Parallax transforms matching hero section
   const { scrollY } = useScroll();
-  const honeycombY = useTransform(scrollY, [0, 800], [0, -150]);
-  const contentY = useTransform(scrollY, [0, 800], [0, -100]);
-  const floatingObjectsY = useTransform(scrollY, [0, 800], [0, -300]);
-  
+  const honeycombY = useTransform(scrollY, [0, 2000], [0, -300]);
+  const contentY = useTransform(scrollY, [0, 2000], [0, -200]);
+  const floatingObjectsY = useTransform(scrollY, [0, 2000], [0, -600]);
+
   const backgroundNames = {
     1: "Light Sage",
-    2: "Navy", 
+    2: "Navy",
     3: "Dark Navy",
     4: "Gradient",
-    5: "White + Accents"
+    5: "White + Accents",
   };
 
   const cycleBackground = () => {
-    setBackgroundOption(prev => prev === 5 ? 1 : prev + 1);
+    setBackgroundOption((prev) => (prev === 5 ? 1 : prev + 1));
   };
 
   const backgroundConfigs = {
@@ -49,8 +49,8 @@ export function Problems() {
         main: "text-mebee-dark-navy",
         yellow: "text-mebee-yellow",
         navy: "text-mebee-navy",
-        description: "text-mebee-dark-navy/80"
-      }
+        description: "text-mebee-dark-navy/80",
+      },
     },
     2: {
       sectionClass: "relative py-24 bg-mebee-navy overflow-hidden",
@@ -62,13 +62,17 @@ export function Problems() {
           <div className="w-16 bg-mebee-yellow/10 h-full absolute right-0" />
         </div>
       ),
-      floatingColors: ["bg-mebee-yellow/30", "bg-mebee-yellow/20", "bg-mebee-yellow/40"],
+      floatingColors: [
+        "bg-mebee-yellow/30",
+        "bg-mebee-yellow/20",
+        "bg-mebee-yellow/40",
+      ],
       textColors: {
         main: "text-white",
         yellow: "text-mebee-yellow",
         navy: "text-mebee-sage",
-        description: "text-white/80"
-      }
+        description: "text-white/80",
+      },
     },
     3: {
       sectionClass: "relative py-24 bg-mebee-dark-navy overflow-hidden",
@@ -77,29 +81,38 @@ export function Problems() {
           {/* NO GRADIENTS - Solid colors only, NO SIDE STRIPES */}
         </div>
       ),
-      floatingColors: ["bg-mebee-yellow/40", "bg-mebee-yellow/30", "bg-mebee-yellow/50"],
+      floatingColors: [
+        "bg-mebee-yellow/40",
+        "bg-mebee-yellow/30",
+        "bg-mebee-yellow/50",
+      ],
       textColors: {
         main: "text-white",
-        yellow: "text-mebee-yellow", 
+        yellow: "text-mebee-yellow",
         navy: "text-white",
-        description: "text-white"
-      }
+        description: "text-white",
+      },
     },
     4: {
-      sectionClass: "relative py-24 bg-gradient-to-b from-mebee-sage/40 via-white to-mebee-sage/20 overflow-hidden",
+      sectionClass:
+        "relative py-24 bg-gradient-to-b from-mebee-sage/40 via-white to-mebee-sage/20 overflow-hidden",
       gradients: (
         <div className="absolute inset-0">
           <div className="w-16 bg-mebee-sage/20 h-full absolute left-0" />
           <div className="w-16 bg-mebee-sage/20 h-full absolute right-0" />
         </div>
       ),
-      floatingColors: ["bg-mebee-sage/30", "bg-mebee-sage/20", "bg-mebee-sage/40"],
+      floatingColors: [
+        "bg-mebee-sage/30",
+        "bg-mebee-sage/20",
+        "bg-mebee-sage/40",
+      ],
       textColors: {
         main: "text-mebee-dark-navy",
         yellow: "text-mebee-yellow",
         navy: "text-mebee-navy",
-        description: "text-mebee-navy/80"
-      }
+        description: "text-mebee-navy/80",
+      },
     },
     5: {
       sectionClass: "relative py-24 bg-white overflow-hidden",
@@ -111,35 +124,39 @@ export function Problems() {
           <div className="w-32 bg-mebee-sage/30 h-full absolute right-0" />
         </div>
       ),
-      floatingColors: ["bg-mebee-sage/40", "bg-mebee-sage/30", "bg-mebee-sage/50"],
+      floatingColors: [
+        "bg-mebee-sage/40",
+        "bg-mebee-sage/30",
+        "bg-mebee-sage/50",
+      ],
       textColors: {
         main: "text-mebee-dark-navy",
         yellow: "text-mebee-yellow",
         navy: "text-mebee-navy",
-        description: "text-mebee-navy/80"
-      }
-    }
+        description: "text-mebee-navy/80",
+      },
+    },
   };
 
   const config = backgroundConfigs[backgroundOption];
 
   return (
-    <section className={config.sectionClass}>
+    <section className={config.sectionClass.replace("py-24", "pt-24 pb-0")}>
       {config.gradients}
 
       {/* White Honeycomb Watermark - Repeating Hero Pattern */}
-      <motion.div 
+      <motion.div
         className="absolute z-5"
-        style={{ 
-          top: '10%',
-          right: '5%',
-          width: '400px',
-          height: '400px',
+        style={{
+          top: "10%",
+          right: "5%",
+          width: "400px",
+          height: "400px",
           backgroundImage: 'url("/images/MeBee Honeycomb_white.png")',
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          y: honeycombY
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          y: honeycombY,
         }}
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -148,10 +165,7 @@ export function Problems() {
       />
 
       {/* 3 Floating Objects - Different Shapes, More Spaced Vertically */}
-      <motion.div 
-        style={{ y: floatingObjectsY }}
-        className="absolute inset-0"
-      >
+      <motion.div style={{ y: floatingObjectsY }} className="absolute inset-0">
         {/* Top - Medium Square */}
         <motion.div
           className={`absolute w-26 h-26 ${config.floatingColors[0]} rounded-lg opacity-70 z-5`}
@@ -203,21 +217,23 @@ export function Problems() {
         />
       </motion.div>
 
-      <motion.div 
+      <motion.div
         className="max-w-6xl mx-auto px-8 relative"
         style={{ y: contentY }}
       >
         {/* Section Header - Typography Focused */}
-        <motion.div 
+        <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
         >
-          <h2 className={`text-5xl md:text-6xl lg:text-7xl font-bold ${config.textColors.main} leading-tight mb-6 font-articulat`}>
+          <h2
+            className={`text-5xl md:text-6xl lg:text-7xl font-bold ${config.textColors.main} leading-tight mb-6 font-articulat`}
+          >
             Stop
-            <motion.span 
+            <motion.span
               className={`block ${config.textColors.yellow}`}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -226,7 +242,7 @@ export function Problems() {
             >
               delays
             </motion.span>
-            <motion.span 
+            <motion.span
               className={`block ${config.textColors.navy}`}
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -241,34 +257,38 @@ export function Problems() {
         {/* Problems List - Clean Structure with Staggered Animations */}
         <div className="max-w-4xl mx-auto space-y-16 mb-20">
           {COPY.problems.painPoints.map((painPoint, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               className="relative"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ 
-                duration: 0.7, 
+              transition={{
+                duration: 0.7,
                 delay: index * 0.2,
-                ease: "easeOut" 
+                ease: "easeOut",
               }}
               viewport={{ once: true }}
             >
-              <motion.div 
+              <motion.div
                 className="absolute -left-6 top-0 w-1 bg-mebee-yellow"
                 initial={{ height: 0 }}
-                whileInView={{ height: '100%' }}
-                transition={{ 
-                  duration: 0.8, 
-                  delay: (index * 0.2) + 0.3,
-                  ease: "easeOut" 
+                whileInView={{ height: "100%" }}
+                transition={{
+                  duration: 0.8,
+                  delay: index * 0.2 + 0.3,
+                  ease: "easeOut",
                 }}
                 viewport={{ once: true }}
               />
               <div className="pl-12">
-                <h3 className={`text-2xl md:text-3xl font-semibold ${config.textColors.main} mb-4 font-articulat`}>
+                <h3
+                  className={`text-2xl md:text-3xl font-semibold ${config.textColors.main} mb-4 font-articulat`}
+                >
                   {painPoint.title}
                 </h3>
-                <p className={`text-lg ${config.textColors.description} leading-relaxed`}>
+                <p
+                  className={`text-lg ${config.textColors.description} leading-relaxed`}
+                >
                   {painPoint.description}
                 </p>
               </div>
@@ -277,7 +297,7 @@ export function Problems() {
         </div>
 
         {/* Solution Teaser - Clean Centered */}
-        <motion.div 
+        <motion.div
           className="text-center bg-mebee-sage/10 rounded-2xl p-12 md:p-16 relative overflow-visible"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -285,73 +305,86 @@ export function Problems() {
           viewport={{ once: true }}
         >
           {/* White Honeycomb - Visible Always */}
-          <div 
+          <motion.div
             className="absolute z-10"
-            style={{ 
-              top: '-90px',
-              left: '20%',
-              width: '300px',
-              height: '300px',
+            style={{
+              top: "60px",
+              left: "20%",
+              width: "300px",
+              height: "300px",
               backgroundImage: 'url("/images/MeBee Honeycomb_white.png")',
-              backgroundSize: 'contain',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              y: honeycombY,
             }}
           />
 
-          {/* Floating Blocks on Right Side - With Parallax */}
+          {/* Floating Blocks with Parallax Container */}
           <motion.div
-            className="absolute w-16 h-12 bg-white/15 rounded-lg z-5"
-            style={{ top: '30%', right: '8%' }}
-            animate={{
-              x: [0, 15, -10, 12, 0],
-              y: [0, -10, 20, -5, 0],
-              rotate: [0, 8, -5, 10, 0],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-          />
-          
-          <motion.div
-            className="absolute w-12 h-16 bg-white/20 rounded-lg z-5"
-            style={{ bottom: '25%', right: '12%' }}
-            animate={{
-              x: [0, -12, 18, -8, 0],
-              y: [0, 15, -25, 10, 0],
-              rotate: [0, -12, 15, -8, 0],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 5,
-            }}
-          />
-          <h3 className={`text-4xl md:text-5xl font-bold ${config.textColors.main} mb-8 leading-tight font-articulat`}>
+            style={{ y: floatingObjectsY }}
+            className="absolute inset-0"
+          >
+            <motion.div
+              className="absolute w-16 h-12 bg-white/15 rounded-lg z-5"
+              style={{ top: "125%", right: "8%" }}
+              animate={{
+                x: [0, 15, -10, 12, 0],
+                y: [0, -10, 20, -5, 0],
+                rotate: [0, 8, -5, 10, 0],
+              }}
+              transition={{
+                duration: 18,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 2,
+              }}
+            />
+
+            <motion.div
+              className="absolute w-12 h-16 bg-white/20 rounded-lg z-5"
+              style={{ bottom: "0%", right: "12%" }}
+              animate={{
+                x: [0, -12, 18, -8, 0],
+                y: [0, 15, -25, 10, 0],
+                rotate: [0, -12, 15, -8, 0],
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 5,
+              }}
+            />
+          </motion.div>
+          <h3
+            className={`text-4xl md:text-5xl font-bold ${config.textColors.main} mb-8 leading-tight font-articulat`}
+          >
             What if you could
-            <span className={`block ${config.textColors.yellow}`}>eliminate all three</span>
+            <span className={`block ${config.textColors.yellow}`}>
+              eliminate all three
+            </span>
             bottlenecks?
           </h3>
-          
-          <p className={`text-xl ${config.textColors.description} mb-12 max-w-3xl mx-auto leading-relaxed`}>
-            MeBee&apos;s AI-native approach transforms these pain points into your competitive advantages.
+
+          <p
+            className={`text-xl ${config.textColors.description} mb-12 max-w-3xl mx-auto leading-relaxed`}
+          >
+            MeBee&apos;s AI-native approach transforms these pain points into
+            your competitive advantages.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Button 
-              variant="primary" 
+            <Button
+              variant="primary"
               size="lg"
               className="bg-mebee-yellow text-mebee-dark-navy hover:bg-mebee-yellow/90 font-semibold px-8 py-4 text-lg min-h-[44px] transition-all duration-200"
             >
               See the solution
             </Button>
-            
-            <Button 
-              variant="outline" 
+
+            <Button
+              variant="outline"
               size="lg"
               className="border-2 border-white text-white hover:bg-white hover:text-mebee-dark-navy font-semibold px-8 py-4 text-lg min-h-[44px] transition-all duration-200"
             >
