@@ -23,7 +23,7 @@ export function Problems() {
       <motion.div 
         className="absolute top-8 right-8 opacity-15 z-5"
         initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 0.15, scale: 1 }}
+        whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
       >
