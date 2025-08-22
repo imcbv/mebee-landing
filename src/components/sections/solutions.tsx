@@ -1,29 +1,133 @@
+"use client";
+
 import React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '../ui/button';
 import { COPY } from '../../lib/constants';
 
 export function Solutions() {
-  return (
-    <section className="relative py-24 bg-mebee-sage">
-      {/* Single Neon Plate - Top Right for Balance */}
-      <div className="absolute top-16 right-16 w-32 h-20 bg-mebee-yellow rounded-lg opacity-80 transform rotate-12"></div>
+  // Parallax transforms with reduced ranges to prevent clipping
+  const { scrollY } = useScroll();
+  const honeycombY = useTransform(scrollY, [0, 2000], [0, -100]);
+  const contentY = useTransform(scrollY, [0, 2000], [0, -50]);
+  const floatingObjectsY = useTransform(scrollY, [0, 2000], [0, -150]);
 
-      <div className="max-w-6xl mx-auto px-8 relative">
+  return (
+    <section className="relative py-32 bg-mebee-sage overflow-visible">
+      {/* White Honeycomb Watermark */}
+      <motion.div
+        className="absolute z-5"
+        style={{
+          top: '15%',
+          left: '8%',
+          width: '350px',
+          backgroundImage: 'url("/images/MeBee Honeycomb_white.png")',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          y: honeycombY
+        }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+      />
+
+      {/* 3 Floating Objects with Different Shapes */}
+      <motion.div 
+        style={{ y: floatingObjectsY }}
+        className="absolute inset-0"
+      >
+        {/* Top Right - Wide Rectangle */}
+        <motion.div
+          className="absolute w-28 h-16 bg-mebee-yellow/70 rounded-lg z-5"
+          initial={{ x: 650, y: 100, rotate: 15 }}
+          animate={{
+            x: [650, 600, 700, 630, 680, 650],
+            y: [100, 80, 140, 180, 90, 100],
+            rotate: [15, 30, -5, 25, 10, 15],
+          }}
+          transition={{
+            duration: 22,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Middle Left - Square */}
+        <motion.div
+          className="absolute w-24 h-24 bg-mebee-yellow/50 rounded-lg z-5"
+          initial={{ x: 80, y: 400, rotate: -10 }}
+          animate={{
+            x: [80, 30, 130, 60, 110, 80],
+            y: [400, 360, 440, 380, 420, 400],
+            rotate: [-10, 18, -25, 12, -8, -10],
+          }}
+          transition={{
+            duration: 26,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 4,
+          }}
+        />
+
+        {/* Bottom Right - Tall Rectangle */}
+        <motion.div
+          className="absolute w-20 h-32 bg-mebee-yellow/60 rounded-lg z-5"
+          initial={{ x: 720, y: 600, rotate: 8 }}
+          animate={{
+            x: [720, 670, 770, 740, 690, 720],
+            y: [600, 560, 640, 580, 620, 600],
+            rotate: [8, 25, -12, 20, 3, 8],
+          }}
+          transition={{
+            duration: 24,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 7,
+          }}
+        />
+      </motion.div>
+
+      <motion.div 
+        className="max-w-6xl mx-auto px-8 relative"
+        style={{ y: contentY }}
+      >
         {/* Section Header */}
-        <div className="text-center mb-20">
+        <motion.div 
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-mebee-dark-navy leading-tight mb-6 font-articulat">
             What You Get
-            <span className="block text-mebee-yellow">Three Pillars</span>
+            <motion.span 
+              className="block text-mebee-yellow"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              Three Pillars
+            </motion.span>
           </h2>
-          <p className="text-xl text-mebee-navy/80 max-w-3xl mx-auto">
+          <motion.p 
+            className="text-xl text-mebee-dark-navy max-w-3xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
             Transform your biggest pain points into competitive advantages
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Three Pillars - Clean Cards */}
         <div className="grid md:grid-cols-3 gap-8 mb-20">
           {/* Pillar 1 */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-200 hover:translate-y-[-2px]">
+          <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-200 hover:translate-y-[-2px] flex flex-col h-full">
             <div className="text-center mb-6">
               <div className="w-16 h-16 bg-mebee-yellow rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-mebee-dark-navy">01</span>
@@ -37,7 +141,7 @@ export function Solutions() {
               {COPY.solutions.pillars[0].description}
             </p>
             
-            <div className="bg-mebee-yellow/10 p-4 rounded-lg border-l-4 border-mebee-yellow mb-6">
+            <div className="bg-mebee-yellow/10 p-4 rounded-lg border-l-4 border-mebee-yellow mb-6 flex-grow">
               <p className="text-sm text-mebee-dark-navy font-medium">
                 ✨ {COPY.solutions.pillars[0].feature}
               </p>
@@ -45,14 +149,14 @@ export function Solutions() {
             
             <Button 
               variant="outline"
-              className="w-full border-2 border-mebee-yellow text-mebee-yellow hover:bg-mebee-yellow hover:text-mebee-dark-navy font-semibold transition-all duration-200 min-h-[44px]"
+              className="w-full border-2 border-mebee-dark-navy text-mebee-dark-navy hover:bg-mebee-dark-navy hover:text-white font-semibold transition-all duration-200 min-h-[44px] mt-auto"
             >
               {COPY.solutions.pillars[0].microCta}
             </Button>
           </div>
 
           {/* Pillar 2 */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-200 hover:translate-y-[-2px]">
+          <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-200 hover:translate-y-[-2px] flex flex-col h-full">
             <div className="text-center mb-6">
               <div className="w-16 h-16 bg-mebee-yellow rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-mebee-dark-navy">02</span>
@@ -66,7 +170,7 @@ export function Solutions() {
               {COPY.solutions.pillars[1].description}
             </p>
             
-            <div className="bg-mebee-yellow/10 p-4 rounded-lg border-l-4 border-mebee-yellow mb-6">
+            <div className="bg-mebee-yellow/10 p-4 rounded-lg border-l-4 border-mebee-yellow mb-6 flex-grow">
               <p className="text-sm text-mebee-dark-navy font-medium">
                 🔄 {COPY.solutions.pillars[1].feature}
               </p>
@@ -74,14 +178,14 @@ export function Solutions() {
             
             <Button 
               variant="outline"
-              className="w-full border-2 border-mebee-yellow text-mebee-yellow hover:bg-mebee-yellow hover:text-mebee-dark-navy font-semibold transition-all duration-200 min-h-[44px]"
+              className="w-full border-2 border-mebee-dark-navy text-mebee-dark-navy hover:bg-mebee-dark-navy hover:text-white font-semibold transition-all duration-200 min-h-[44px] mt-auto"
             >
               {COPY.solutions.pillars[1].microCta}
             </Button>
           </div>
 
           {/* Pillar 3 */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-200 hover:translate-y-[-2px]">
+          <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-200 hover:translate-y-[-2px] flex flex-col h-full">
             <div className="text-center mb-6">
               <div className="w-16 h-16 bg-mebee-yellow rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-mebee-dark-navy">03</span>
@@ -95,7 +199,7 @@ export function Solutions() {
               {COPY.solutions.pillars[2].description}
             </p>
             
-            <div className="bg-mebee-yellow/10 p-4 rounded-lg border-l-4 border-mebee-yellow mb-6">
+            <div className="bg-mebee-yellow/10 p-4 rounded-lg border-l-4 border-mebee-yellow mb-6 flex-grow">
               <p className="text-sm text-mebee-dark-navy font-medium">
                 🚀 {COPY.solutions.pillars[2].feature}
               </p>
@@ -103,7 +207,7 @@ export function Solutions() {
             
             <Button 
               variant="outline"
-              className="w-full border-2 border-mebee-yellow text-mebee-yellow hover:bg-mebee-yellow hover:text-mebee-dark-navy font-semibold transition-all duration-200 min-h-[44px]"
+              className="w-full border-2 border-mebee-dark-navy text-mebee-dark-navy hover:bg-mebee-dark-navy hover:text-white font-semibold transition-all duration-200 min-h-[44px] mt-auto"
             >
               {COPY.solutions.pillars[2].microCta}
             </Button>
@@ -164,7 +268,7 @@ export function Solutions() {
             </Button>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
