@@ -138,13 +138,47 @@ html {
   animation-delay: 6s, 4s, 1s;
 }
 
-/* Respect reduced motion preferences */
+/* Respect reduced motion preferences - Global compliance with 200-260ms timing */
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  
   .float-object-1,
   .float-object-2,
   .float-object-3,
   .float-object-4 {
-    animation: none;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Standard motion timing - 200-260ms ease-out */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    transition-timing-function: ease-out;
+  }
+  
+  .transition-all {
+    transition-duration: 200ms;
+  }
+  
+  .transition-colors {
+    transition-duration: 220ms;
+  }
+  
+  .transition-transform {
+    transition-duration: 240ms;
+  }
+  
+  .transition-opacity {
+    transition-duration: 260ms;
   }
 }
 

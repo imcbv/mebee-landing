@@ -1,0 +1,25 @@
+{
+  "name": "MeBee - AI-Native Digital Assets Platform",
+  "short_name": "MeBee",
+  "description": "Find smarter, share better. AI-native digital assets platform for global teams.",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#F5FF00",
+  "background_color": "#252B48",
+  "display": "browser",
+  "orientation": "portrait-primary",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["business", "productivity", "utilities"]
+}

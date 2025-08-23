@@ -1,37 +1,19 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "../ui/button";
 import { COPY } from "../../lib/constants";
 
 export function Problems() {
   // State to cycle through different backgrounds
-  const [backgroundOption, setBackgroundOption] = useState(3); // Default to dark navy
-  const [isClient, setIsClient] = useState(false);
-
-  // Client-side only to prevent hydration mismatch
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const [backgroundOption] = useState(3); // Default to dark navy
 
   // Parallax transforms - matching hero section
   const { scrollY } = useScroll();
   const honeycombY = useTransform(scrollY, [0, 800], [0, -150]);
   const contentY = useTransform(scrollY, [0, 800], [0, -100]);
   const floatingObjectsY = useTransform(scrollY, [0, 800], [0, -300]);
-
-  const backgroundNames = {
-    1: "Light Sage",
-    2: "Navy",
-    3: "Dark Navy",
-    4: "Gradient",
-    5: "White + Accents",
-  };
-
-  const cycleBackground = () => {
-    setBackgroundOption((prev) => (prev === 5 ? 1 : prev + 1));
-  };
 
   const backgroundConfigs = {
     1: {
