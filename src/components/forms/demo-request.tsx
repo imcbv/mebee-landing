@@ -81,7 +81,7 @@ export function DemoRequestForm({ onClose }: DemoRequestFormProps) {
             required
             value={formData.name}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-mebee-navy/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-mebee-yellow focus:border-transparent"
+            className="w-full px-3 py-3 border-2 border-mebee-navy/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-mebee-yellow/50 focus:border-mebee-yellow transition-colors"
             placeholder="Your full name"
           />
         </div>
@@ -97,7 +97,7 @@ export function DemoRequestForm({ onClose }: DemoRequestFormProps) {
             required
             value={formData.email}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-mebee-navy/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-mebee-yellow focus:border-transparent"
+            className="w-full px-3 py-3 border-2 border-mebee-navy/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-mebee-yellow/50 focus:border-mebee-yellow transition-colors"
             placeholder="you@company.com"
           />
         </div>
@@ -113,7 +113,7 @@ export function DemoRequestForm({ onClose }: DemoRequestFormProps) {
             required
             value={formData.company}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-mebee-navy/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-mebee-yellow focus:border-transparent"
+            className="w-full px-3 py-3 border-2 border-mebee-navy/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-mebee-yellow/50 focus:border-mebee-yellow transition-colors"
             placeholder="Your company name"
           />
         </div>
@@ -128,7 +128,7 @@ export function DemoRequestForm({ onClose }: DemoRequestFormProps) {
             required
             value={formData.role}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-mebee-navy/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-mebee-yellow focus:border-transparent"
+            className="w-full px-3 py-3 border-2 border-mebee-navy/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-mebee-yellow/50 focus:border-mebee-yellow transition-colors"
           >
             <option value="">Select your role</option>
             <option value="Brand Manager">Brand Manager</option>
@@ -162,7 +162,7 @@ export function DemoRequestForm({ onClose }: DemoRequestFormProps) {
               type="button"
               variant="outline"
               onClick={onClose}
-              className="flex-1 border-mebee-navy/20 text-mebee-navy hover:bg-mebee-navy/5"
+              className="flex-1 border-mebee-navy/20 text-mebee-navy hover:bg-mebee-navy/5 min-h-[44px] font-semibold"
             >
               Cancel
             </Button>
@@ -170,7 +170,7 @@ export function DemoRequestForm({ onClose }: DemoRequestFormProps) {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="flex-1 bg-mebee-yellow text-mebee-dark-navy hover:bg-mebee-yellow/90 disabled:opacity-50"
+            className="flex-1 bg-mebee-yellow text-mebee-dark-navy hover:bg-mebee-yellow/90 disabled:opacity-50 min-h-[44px] font-semibold"
           >
             {isSubmitting ? 'Submitting...' : 'Book Demo'}
           </Button>

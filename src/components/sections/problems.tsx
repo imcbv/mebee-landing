@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Button } from '../ui/button';
 import { COPY } from '../../lib/constants';
@@ -19,22 +20,21 @@ export function Problems() {
         <div className="w-16 bg-mebee-sage/10 h-full absolute right-0" />
       </div>
 
-      {/* Navy Honeycomb Watermark - Actual Image */}
+      {/* Navy Honeycomb Watermark - Optimized Image */}
       <motion.div // HONEYCOMB: Problems section - TOP RIGHT (140px, navy)
-        className="absolute top-8 right-8 opacity-15 z-5"
+        className="absolute top-8 right-8 opacity-15 z-5 w-40 h-40"
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <div 
-          className="w-40 h-40"
-          style={{
-            backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center'
-          }}
+        <Image
+          src="/images/MeBee Honeycomb_navy.png"
+          alt="MeBee Honeycomb Pattern"
+          fill
+          sizes="160px"
+          style={{ objectFit: "contain", objectPosition: "center" }}
+          loading="lazy"
         />
       </motion.div>
 

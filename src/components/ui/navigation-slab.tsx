@@ -60,7 +60,7 @@ export function NavigationSlab() {
   };
 
   return (
-    <div className="fixed left-0 top-0 h-screen z-50 bg-mebee-yellow">
+    <div className="fixed left-0 top-0 h-screen z-50 bg-mebee-yellow hidden lg:block">
       <div className="h-full flex flex-col justify-center py-8 px-3 space-y-2">
         {sections.map((section, index) => (
           <button

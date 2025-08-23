@@ -1,3 +1,6 @@
+/* Load Articulat CF font first */
+@import url("https://use.typekit.net/qur8hjb.css") layer(fonts);
+
 @import "tailwindcss";
 
 :root {
@@ -12,7 +15,7 @@
   --foreground: #252B48;
   
   /* Font Variables */
-  --font-articulat: 'articulat-cf', var(--font-inter), 'Inter', sans-serif;
+  --font-articulat: 'articulat-cf', 'Inter', system-ui, sans-serif;
 }
 
 @theme {
@@ -36,9 +39,16 @@ body {
   line-height: 1.6;
 }
 
-/* Articulat CF Font Loading */
+/* Articulat CF Font Loading with performance optimization */
 .font-articulat {
   font-family: var(--font-articulat);
+  font-display: swap; /* Improve font loading performance */
+}
+
+/* Add font-display: swap to all font faces */
+@font-face {
+  font-family: 'articulat-cf';
+  font-display: swap;
 }
 
 /* Smooth scrolling for navigation */

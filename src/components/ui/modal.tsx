@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../../lib/utils';
 
 export interface ModalProps {
@@ -44,7 +45,7 @@ const Modal: React.FC<ModalProps> = ({
     };
   }, [isOpen, onClose]);
 
-  if (!mounted || !isOpen) {
+  if (!mounted) {
     return null;
   }
 
@@ -56,32 +57,45 @@ const Modal: React.FC<ModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-mebee-dark-navy/60 backdrop-blur-sm"
-        onClick={onClose}
-      />
-      
-      {/* Modal */}
-      <div
-        className={cn(
-          'relative w-full mx-4 bg-white rounded-lg shadow-xl border border-mebee-sage/20',
-          sizes[size]
-        )}
-      >
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* Backdrop */}
+          <motion.div
+            className="absolute inset-0 bg-mebee-dark-navy/60 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={onClose}
+          />
+          
+          {/* Modal */}
+          <motion.div
+            className={cn(
+              'relative w-full mx-4 bg-white rounded-lg shadow-xl border border-mebee-sage/20',
+              sizes[size]
+            )}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={title ? 'modal-title' : undefined}
+          >
         {/* Header */}
         {(title || showCloseButton) && (
           <div className="flex items-center justify-between p-6 border-b border-mebee-sage/20">
             {title && (
-              <h2 className="text-xl font-semibold text-mebee-dark-navy">
+              <h2 id="modal-title" className="text-xl font-semibold text-mebee-dark-navy font-articulat">
                 {title}
               </h2>
             )}
             {showCloseButton && (
               <button
                 onClick={onClose}
-                className="text-mebee-navy hover:text-mebee-dark-navy transition-colors p-1"
+                className="text-mebee-navy hover:text-mebee-dark-navy transition-colors p-2 rounded-full hover:bg-gray-100 min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label="Close modal"
               >
                 <svg
@@ -106,8 +120,10 @@ const Modal: React.FC<ModalProps> = ({
         <div className="p-6">
           {children}
         </div>
-      </div>
-    </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
   );
 };
 

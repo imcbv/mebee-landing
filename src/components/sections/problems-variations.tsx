@@ -138,12 +138,12 @@ export function Problems() {
     },
   };
 
-  const config = backgroundConfigs[backgroundOption];
+  const config = backgroundConfigs[backgroundOption as keyof typeof backgroundConfigs];
 
   return (
     <section id="problems" className="min-h-screen flex overflow-hidden">
       {/* LEFT SIDE - Yellow Slab (nav bar width) */}
-      <div className="w-20 bg-mebee-yellow relative"></div>
+      <div className="w-20 bg-mebee-yellow relative hidden lg:block"></div>
 
       {/* RIGHT SIDE - Main Content */}
       <div className="flex-1 bg-mebee-dark-navy relative">

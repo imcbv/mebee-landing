@@ -17,7 +17,7 @@ export function FinalCTA() {
       className="min-h-screen text-white flex overflow-hidden"
     >
       {/* LEFT SIDE - Yellow Slab (nav bar width) */}
-      <div className="w-20 bg-mebee-yellow relative"></div>
+      <div className="w-20 bg-mebee-yellow relative hidden lg:block"></div>
 
       {/* RIGHT SIDE - Main Content */}
       <div className="flex-1 bg-mebee-dark-navy relative">
@@ -149,7 +149,7 @@ export function FinalCTA() {
           >
             <Button
               size="lg"
-              className="bg-mebee-yellow text-mebee-dark-navy hover:bg-mebee-yellow/90 font-semibold px-12 py-4 text-xl min-h-[44px] transition-all duration-200 border-2 border-transparent hover:border-white"
+              className="bg-mebee-yellow text-mebee-dark-navy hover:bg-mebee-yellow/90 font-semibold px-12 py-2 text-xl min-h-11 transition-all duration-200 border-2 border-transparent hover:border-white"
             >
               {COPY.finalCta.cta}
             </Button>

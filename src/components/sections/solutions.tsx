@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from 'next/image';
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "../ui/button";
 import { COPY } from "../../lib/constants";
@@ -17,30 +18,33 @@ export function Solutions() {
   return (
     <section id="solutions" className="min-h-screen overflow-hidden flex">
       {/* LEFT SIDE - Yellow Slab (nav bar width) */}
-      <div className="w-20 bg-mebee-yellow relative">
+      <div className="w-20 bg-mebee-yellow relative hidden lg:block">
       </div>
 
       {/* RIGHT SIDE - Main Content */}
       <div className="flex-1 bg-mebee-sage relative overflow-visible">
       {/* Navy Honeycomb Watermarks - Multiple for sage background */}
       <motion.div // HONEYCOMB: Solutions main section - TOP LEFT (350px)
-        className="absolute z-0"
+        className="absolute z-0 w-[350px] aspect-square"
         style={{
           top: "15%",
           left: "8%",
-          width: "350px",
-          aspectRatio: "1",
-          backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
           y: honeycombY,
         }}
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
-      />
+      >
+        <Image
+          src="/images/MeBee Honeycomb_navy.png"
+          alt="MeBee Honeycomb Pattern"
+          fill
+          sizes="350px"
+          style={{ objectFit: "contain", objectPosition: "center" }}
+          loading="lazy"
+        />
+      </motion.div>
 
 
       {/* 3 Floating Objects with Different Shapes */}
@@ -265,24 +269,26 @@ export function Solutions() {
         >
           {/* Honeycomb Background for Demo Section */}
           <motion.div // HONEYCOMB: Three Pillars demo section - FAR RIGHT (450px, partially off-screen)
-            className="absolute z-0"
+            className="absolute z-0 w-[450px] aspect-square opacity-30"
             style={{
               top: "15%",
               right: "-5%",
-              width: "450px",
-              aspectRatio: "1",
-              backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
-              backgroundSize: "contain",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
               y: honeycombY,
-              opacity: 0.3,
             }}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 0.3, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
-          />
+          >
+            <Image
+              src="/images/MeBee Honeycomb_navy.png"
+              alt="MeBee Honeycomb Pattern"
+              fill
+              sizes="450px"
+              style={{ objectFit: "contain", objectPosition: "center" }}
+              loading="lazy"
+            />
+          </motion.div>
 
           {/* Dark Navy Floating Objects on the Left */}
           <motion.div style={{ y: contentY }} className="absolute inset-0 z-0">

@@ -49,6 +49,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  other: {
+    // Preconnect to Adobe Fonts for performance
+    'link': 'https://use.typekit.net',
+  },
 };
 
 export default function RootLayout({
@@ -59,10 +63,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="stylesheet" href="https://use.typekit.net/qur8hjb.css" />
+        <link rel="preconnect" href="https://use.typekit.net" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://use.typekit.net" />
       </head>
       <body
-        className={`${inter.variable} font-sans antialiased`}
+        className={`${inter.variable} font-articulat antialiased`}
       >
         {children}
       </body>

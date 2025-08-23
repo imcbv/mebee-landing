@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "../ui/button";
+import { Modal } from "../ui/modal";
+import { DemoRequestForm } from "../forms/demo-request";
 import { NavigationSlab } from "../ui/navigation-slab";
 import { COPY, BRAND_ASSETS } from "../../lib/constants";
 
@@ -28,6 +30,7 @@ function useTypewriter(text: string, speed: number = 50) {
 
 export function Hero() {
   const { scrollY } = useScroll();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Parallax transforms - floating objects move MUCH more for noticeable effect
   const honeycombY = useTransform(scrollY, [0, 800], [0, -150]);
@@ -38,11 +41,14 @@ export function Hero() {
   // Typewriter effect starting immediately
   const typedHeadline = useTypewriter(COPY.hero.headline, 60);
 
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <section id="hero" className="relative min-h-screen flex overflow-hidden">
       <NavigationSlab />
       {/* LEFT SIDE - Yellow Slab (nav bar width) */}
-      <div className="w-20 bg-mebee-yellow relative">
+      <div className="w-20 bg-mebee-yellow relative hidden lg:block">
         {/* Liquid skin texture */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-mebee-yellow/20 to-mebee-yellow/40 opacity-30"></div>
 
@@ -55,16 +61,22 @@ export function Hero() {
             transform: "translateX(-50%)",
             width: "500px",
             aspectRatio: "1",
-            backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
             y: honeycombY,
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.7 }}
           transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-        />
+        >
+          <Image
+            src="/images/MeBee Honeycomb_navy.png"
+            alt="MeBee Honeycomb Pattern"
+            fill
+            sizes="500px"
+            style={{ objectFit: "contain", objectPosition: "center" }}
+            loading="eager"
+            priority
+          />
+        </motion.div>
 
         {/* Logo with elegant fade in and parallax */}
         <motion.div
@@ -255,6 +267,7 @@ export function Hero() {
               <Button
                 variant="outline"
                 size="lg"
+                onClick={openModal}
                 className="border-2 border-mebee-yellow text-mebee-yellow hover:bg-mebee-yellow hover:text-mebee-dark-navy font-semibold px-8 py-4 text-lg min-h-[44px] transition-all duration-200"
               >
                 {COPY.hero.cta}
@@ -274,6 +287,16 @@ export function Hero() {
           </div>
         </motion.div>
       </div>
+
+      {/* Demo Request Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title="Book Your Demo"
+        size="lg"
+      >
+        <DemoRequestForm onClose={closeModal} />
+      </Modal>
     </section>
   );
 }

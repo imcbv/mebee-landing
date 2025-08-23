@@ -13,7 +13,7 @@ export function Audience() {
   return (
     <section id="audience" className="min-h-screen flex overflow-hidden">
       {/* LEFT SIDE - Yellow Slab (nav bar width) */}
-      <div className="w-20 bg-mebee-yellow relative">
+      <div className="w-20 bg-mebee-yellow relative hidden lg:block">
       </div>
 
       {/* RIGHT SIDE - Main Content */}
