@@ -8,6 +8,7 @@ export function Audience() {
   // Parallax transforms - matching hero section
   const { scrollY } = useScroll();
   const honeycombY = useTransform(scrollY, [0, 800], [0, -150]);
+  const contentY = useTransform(scrollY, [0, 800], [0, -100]);
   const floatingObjectsY = useTransform(scrollY, [0, 800], [0, -300]);
 
   return (
@@ -17,7 +18,7 @@ export function Audience() {
       </div>
 
       {/* RIGHT SIDE - Main Content */}
-      <div className="flex-1 bg-mebee-sage relative">
+      <div className="flex-1 bg-mebee-dark-navy relative">
       {/* Navy Honeycomb Watermarks - Multiple for sage background */}
       <motion.div // HONEYCOMB: Audience section - TOP LEFT (350px)
         className="absolute z-0"
@@ -26,14 +27,14 @@ export function Audience() {
           left: "5%",
           width: "350px",
           aspectRatio: "1",
-          backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
+          backgroundImage: 'url("/images/MeBee Honeycomb_white.png")',
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           y: honeycombY,
         }}
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
       />
@@ -45,14 +46,14 @@ export function Audience() {
           right: "8%",
           width: "300px",
           aspectRatio: "1",
-          backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
+          backgroundImage: 'url("/images/MeBee Honeycomb_white.png")',
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           y: honeycombY,
         }}
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
         viewport={{ once: true }}
       />
@@ -110,17 +111,20 @@ export function Audience() {
         />
       </motion.div>
 
-      <div className="max-w-6xl mx-auto px-8 relative min-h-screen flex flex-col justify-center pb-20">
+      <motion.div 
+        className="max-w-6xl mx-auto px-8 relative min-h-screen flex flex-col justify-center pb-20"
+        style={{ y: contentY }}
+      >
         {/* Section Header */}
         <motion.div 
-          className="text-center mb-20 pt-20"
+          className="text-center mb-20 pt-32"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
         >
           <motion.h2 
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-mebee-dark-navy mb-6 font-articulat"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 font-articulat"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
@@ -129,7 +133,7 @@ export function Audience() {
             Who Benefits
           </motion.h2>
           <motion.p 
-            className="text-xl text-mebee-dark-navy max-w-3xl mx-auto"
+            className="text-xl text-white/80 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
@@ -219,7 +223,7 @@ export function Audience() {
             </div>
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
       </div>
     </section>
   );

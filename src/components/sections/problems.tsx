@@ -23,8 +23,8 @@ export function Problems() {
       {/* Navy Honeycomb Watermark - Optimized Image */}
       <motion.div // HONEYCOMB: Problems section - TOP RIGHT (140px, navy)
         className="absolute top-8 right-8 opacity-15 z-5 w-40 h-40"
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
       >
@@ -40,7 +40,7 @@ export function Problems() {
 
       {/* Floating Sage Geometric Elements */}
       <motion.div
-        className="absolute w-24 h-16 bg-mebee-sage/20 rounded-lg z-5"
+        className="absolute w-24 h-16 bg-mebee-sage/20  z-5"
         style={{ top: '15%', left: '8%' }}
         animate={{
           x: [0, 20, -10, 15, 0],
@@ -55,7 +55,7 @@ export function Problems() {
       />
       
       <motion.div
-        className="absolute w-16 h-20 bg-mebee-sage/15 rounded-lg z-5"
+        className="absolute w-16 h-20 bg-mebee-sage/15  z-5"
         style={{ top: '60%', right: '12%' }}
         animate={{
           x: [0, -25, 15, -10, 0],
@@ -71,7 +71,7 @@ export function Problems() {
       />
 
       <motion.div
-        className="absolute w-20 h-12 bg-mebee-sage/25 rounded-lg z-5"
+        className="absolute w-20 h-12 bg-mebee-sage/25  z-5"
         style={{ bottom: '20%', left: '15%' }}
         animate={{
           x: [0, 30, -20, 25, 0],
@@ -158,7 +158,7 @@ export function Problems() {
 
         {/* Solution Teaser - Clean Centered */}
         <motion.div 
-          className="text-center bg-mebee-sage/10 rounded-2xl p-12 md:p-16 relative"
+          className="text-center bg-mebee-sage/10  p-12 md:p-16 relative"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}

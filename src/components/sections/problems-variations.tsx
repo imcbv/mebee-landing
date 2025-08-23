@@ -145,8 +145,8 @@ export function Problems() {
             backgroundPosition: "center",
             y: honeycombY,
           }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
         />
@@ -213,7 +213,7 @@ export function Problems() {
         >
           {/* Section Header - Typography Focused */}
           <motion.div
-            className="text-center mb-20 pt-20"
+            className="text-center mb-20 pt-32"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}

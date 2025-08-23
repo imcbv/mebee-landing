@@ -9,53 +9,54 @@ export function FinalCTA() {
   // Parallax transforms - matching hero section
   const { scrollY } = useScroll();
   const honeycombY = useTransform(scrollY, [0, 800], [0, -150]);
+  const contentY = useTransform(scrollY, [0, 800], [0, -100]);
   const floatingObjectsY = useTransform(scrollY, [0, 800], [0, -300]);
 
   return (
     <section
       id="final-cta"
-      className="min-h-screen text-white flex overflow-hidden"
+      className="min-h-screen text-mebee-dark-navy flex overflow-hidden"
     >
       {/* LEFT SIDE - Yellow Slab (nav bar width) */}
       <div className="w-20 bg-mebee-yellow relative hidden lg:block"></div>
 
       {/* RIGHT SIDE - Main Content */}
-      <div className="flex-1 bg-mebee-dark-navy relative">
-        {/* White Honeycomb Watermarks - Multiple for dark navy background */}
-        <motion.div // HONEYCOMB: Final CTA section - TOP RIGHT (400px, white)
+      <div className="flex-1 bg-mebee-sage relative">
+        {/* Navy Honeycomb Watermarks - Multiple for sage background */}
+        <motion.div // HONEYCOMB: Final CTA section - TOP RIGHT (400px, navy)
           className="absolute z-5"
           style={{
             top: "-3%",
             right: "-3%",
             width: "400px",
             aspectRatio: "1",
-            backgroundImage: 'url("/images/MeBee Honeycomb_white.png")',
+            backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             y: honeycombY,
           }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
         />
 
-        <motion.div // HONEYCOMB: Final CTA section - BOTTOM LEFT (300px, white)
+        <motion.div // HONEYCOMB: Final CTA section - BOTTOM LEFT (300px, navy)
           className="absolute z-5"
           style={{
             bottom: "0%",
             left: "5%",
             width: "300px",
             aspectRatio: "1",
-            backgroundImage: 'url("/images/MeBee Honeycomb_white.png")',
+            backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             y: honeycombY,
           }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           viewport={{ once: true }}
         />
@@ -68,9 +69,9 @@ export function FinalCTA() {
           {/* Top Center - Wide Rectangle */}
           <motion.div
             className="absolute w-32 h-18 bg-mebee-yellow/60 z-5"
-            initial={{ x: 400, y: 80, rotate: 12 }}
+            initial={{ x: 1200, y: 80, rotate: 12 }}
             animate={{
-              x: [400, 450, 350, 420, 380, 400],
+              x: [1200, 1250, 1350, 1420, 1380, 1400],
               y: [80, 60, 120, 140, 70, 80],
               rotate: [12, 27, -8, 22, 2, 12],
             }}
@@ -101,9 +102,9 @@ export function FinalCTA() {
           {/* Bottom Right - Tall Rectangle */}
           <motion.div
             className="absolute w-22 h-34 bg-mebee-yellow/70 z-5"
-            initial={{ x: 720, y: 620, rotate: 15 }}
+            initial={{ x: 1220, y: 620, rotate: 15 }}
             animate={{
-              x: [720, 670, 770, 740, 690, 720],
+              x: [1220, 1070, 1170, 1140, 1090, 1120],
               y: [620, 580, 660, 600, 640, 620],
               rotate: [15, 32, -10, 25, 0, 15],
             }}
@@ -118,6 +119,7 @@ export function FinalCTA() {
 
         <motion.div
           className="max-w-6xl mx-auto px-8 text-center min-h-screen flex flex-col justify-center pt-20"
+          style={{ y: contentY }}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -133,7 +135,7 @@ export function FinalCTA() {
             {COPY.finalCta.headline}
           </motion.h2>
           <motion.p
-            className="text-xl mb-12 text-white/90 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl mb-12 text-mebee-dark-navy/80 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}

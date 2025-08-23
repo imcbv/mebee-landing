@@ -128,20 +128,6 @@ export function Hero() {
         {/* Liquid skin texture background */}
         <div className="absolute inset-0 bg-gradient-to-br from-mebee-sage/80 via-mebee-sage to-mebee-sage/90 opacity-60"></div>
 
-        {/* Header elements */}
-        <div className="absolute top-8 right-8 flex items-center space-x-6 z-20">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-1">
-              <div className="w-6 h-0.5 bg-mebee-dark-navy" />
-              <div className="w-6 h-0.5 bg-mebee-dark-navy" />
-              <div className="w-6 h-0.5 bg-mebee-dark-navy" />
-            </div>
-            <span className="text-mebee-dark-navy font-medium">Menu</span>
-          </div>
-          <div className="w-8 h-8 bg-mebee-yellow flex items-center justify-center">
-            <span className="text-mebee-dark-navy text-lg">🔍</span>
-          </div>
-        </div>
 
         {/* Four floating objects with parallax */}
         <motion.div
