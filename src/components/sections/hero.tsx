@@ -9,13 +9,13 @@ import { COPY, BRAND_ASSETS } from "../../lib/constants";
 
 // Typewriter hook
 function useTypewriter(text: string, speed: number = 50) {
-  const [displayText, setDisplayText] = useState('');
+  const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (currentIndex < text.length) {
       const timeout = setTimeout(() => {
-        setDisplayText(prev => prev + text[currentIndex]);
+        setDisplayText((prev) => prev + text[currentIndex]);
         setCurrentIndex(currentIndex + 1);
       }, speed);
 
@@ -28,13 +28,13 @@ function useTypewriter(text: string, speed: number = 50) {
 
 export function Hero() {
   const { scrollY } = useScroll();
-  
+
   // Parallax transforms - floating objects move MUCH more for noticeable effect
   const honeycombY = useTransform(scrollY, [0, 800], [0, -150]);
   const logoY = useTransform(scrollY, [0, 800], [0, -50]);
   const contentY = useTransform(scrollY, [0, 800], [0, -100]);
   const floatingObjectsY = useTransform(scrollY, [0, 800], [0, -300]);
-  
+
   // Typewriter effect starting immediately
   const typedHeadline = useTypewriter(COPY.hero.headline, 60);
 
@@ -47,19 +47,19 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-mebee-yellow/20 to-mebee-yellow/40 opacity-30"></div>
 
         {/* Navy Honeycomb with elegant fade in and parallax */}
-        <motion.div 
+        <motion.div // HONEYCOMB: Hero section - LEFT YELLOW SLAB BOTTOM (500px, navy)
           className="absolute z-20 opacity-70"
-          style={{ 
-            bottom: '-150px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '500px',
-            height: '500px',
+          style={{
+            bottom: "-150px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "500px",
+            aspectRatio: "1",
             backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            y: honeycombY
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            y: honeycombY,
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.7 }}
@@ -67,7 +67,7 @@ export function Hero() {
         />
 
         {/* Logo with elegant fade in and parallax */}
-        <motion.div 
+        <motion.div
           className="absolute top-8 left-8 z-10"
           style={{ y: logoY }}
           initial={{ opacity: 0 }}
@@ -126,102 +126,104 @@ export function Hero() {
             </div>
             <span className="text-mebee-dark-navy font-medium">Menu</span>
           </div>
-          <div className="w-8 h-8 bg-mebee-yellow rounded-full flex items-center justify-center">
+          <div className="w-8 h-8 bg-mebee-yellow flex items-center justify-center">
             <span className="text-mebee-dark-navy text-lg">🔍</span>
           </div>
         </div>
 
         {/* Four floating objects with parallax */}
-        <motion.div 
+        <motion.div
           style={{ y: floatingObjectsY }}
           className="absolute inset-0"
         >
-        <motion.div
-          className="absolute w-32 h-24 bg-mebee-yellow rounded-lg opacity-80 z-5"
-          initial={{ x: 580, y: 20, rotate: 12 }}
-          animate={{
-            x: [580, 530, 630, 560, 610, 580],
-            y: [20, 0, 60, 100, 10, 20],
-            rotate: [12, 25, -5, 30, 8, 12],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
+          <motion.div
+            className="absolute w-32 h-24 bg-mebee-yellow opacity-80 z-5"
+            style={{ right: "10%", top: "20px" }}
+            animate={{
+              x: [0, -50, 50, -30, 30, 0],
+              y: [0, -20, 40, 80, -10, 0],
+              rotate: [12, 25, -5, 30, 8, 12],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
 
-        <motion.div
-          className="absolute w-24 h-16 bg-mebee-yellow rounded-lg opacity-60 z-5"
-          initial={{ x: 660, y: 250, rotate: -6 }}
-          animate={{
-            x: [660, 610, 710, 640, 690, 660],
-            y: [250, 200, 300, 220, 280, 250],
-            rotate: [-6, 15, -20, 10, -15, -6],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 3,
-          }}
-        />
+          <motion.div
+            className="absolute w-24 h-16 bg-mebee-yellow opacity-60 z-5"
+            style={{ right: "5%", top: "250px" }}
+            animate={{
+              x: [0, -50, 50, -30, 40, 0],
+              y: [0, -50, 50, -30, 30, 0],
+              rotate: [-6, 15, -20, 10, -15, -6],
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 3,
+            }}
+          />
 
-        <motion.div
-          className="absolute w-20 h-20 bg-mebee-yellow/40 rounded-lg z-5"
-          initial={{ x: 720, y: 480, rotate: 45 }}
-          animate={{
-            x: [720, 680, 760, 740, 700, 720],
-            y: [480, 440, 520, 460, 500, 480],
-            rotate: [45, 70, 20, 60, 35, 45],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 6,
-          }}
-        />
+          <motion.div
+            className="absolute w-20 h-20 bg-mebee-yellow/40 z-5"
+            style={{ right: "15%", top: "480px" }}
+            animate={{
+              x: [0, -50, 50, -20, -30, 0],
+              y: [0, -40, 40, -20, 20, 0],
+              rotate: [45, 70, 20, 60, 35, 45],
+            }}
+            transition={{
+              duration: 18,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 6,
+            }}
+          />
 
-        <motion.div
-          className="absolute w-16 h-24 bg-mebee-yellow rounded-lg opacity-50 z-5"
-          initial={{ x: 630, y: 700, rotate: -12 }}
-          animate={{
-            x: [630, 670, 590, 650, 610, 630],
-            y: [700, 660, 740, 680, 720, 700],
-            rotate: [-12, 20, -25, 15, -8, -12],
-          }}
-          transition={{
-            duration: 22,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 9,
-          }}
-        />
+          <motion.div
+            className="absolute w-16 h-24 bg-mebee-yellow opacity-50 z-5"
+            style={{ right: "8%", top: "700px" }}
+            animate={{
+              x: [0, 40, -40, 20, -20, 0],
+              y: [0, -40, 40, -20, 20, 0],
+              rotate: [-12, 20, -25, 15, -8, -12],
+            }}
+            transition={{
+              duration: 22,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 9,
+            }}
+          />
         </motion.div>
 
         {/* Main content with elegant animations and parallax */}
-        <motion.div 
+        <motion.div
           className="relative flex items-center justify-center min-h-screen px-12 z-10"
           style={{ y: contentY }}
         >
           <div className="text-center max-w-4xl">
             {/* MeBee Logo Icon with elegant fade */}
-            <motion.div 
+            <motion.div
               className="mb-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             >
-              <div className="w-32 h-32 bg-mebee-yellow rounded-full flex items-center justify-center mx-auto">
-                <Image
-                  src={BRAND_ASSETS.logos.standard}
-                  alt="MeBee"
-                  width={160}
-                  height={160}
-                  className="w-40 h-40"
-                />
-              </div>
+              <Image
+                src={BRAND_ASSETS.logos.standard}
+                alt="MeBee"
+                width={320}
+                height={100}
+                className="mx-auto"
+                style={{
+                  filter:
+                    "brightness(0) saturate(100%) invert(15%) sepia(25%) saturate(1200%) hue-rotate(200deg) brightness(90%) contrast(95%)",
+                }}
+              />
             </motion.div>
 
             {/* Typewriter headline with fixed height to prevent layout shift */}
@@ -235,8 +237,8 @@ export function Hero() {
                 |
               </motion.span>
             </h1>
-            
-            <motion.h2 
+
+            <motion.h2
               className="text-xl md:text-2xl text-mebee-dark-navy leading-relaxed mb-12 max-w-3xl mx-auto"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -244,22 +246,22 @@ export function Hero() {
             >
               {COPY.hero.subheadline}
             </motion.h2>
-            
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.4, ease: "easeOut" }}
             >
-              <Button 
+              <Button
                 variant="outline"
-                size="lg" 
-                className="border-2 border-mebee-yellow text-mebee-yellow hover:bg-mebee-yellow hover:text-mebee-dark-navy font-semibold px-8 py-4 rounded-full text-lg min-h-[44px] transition-all duration-200"
+                size="lg"
+                className="border-2 border-mebee-yellow text-mebee-yellow hover:bg-mebee-yellow hover:text-mebee-dark-navy font-semibold px-8 py-4 text-lg min-h-[44px] transition-all duration-200"
               >
                 {COPY.hero.cta}
               </Button>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="mt-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

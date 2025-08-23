@@ -16,15 +16,34 @@ export function NavigationSlab() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
       
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const element = document.getElementById(sections[i].id);
-        if (element && element.offsetTop <= scrollPosition) {
-          setCurrentSection(sections[i].id);
-          break;
+      // Find which section is most visible in the viewport
+      let maxVisibility = 0;
+      let activeSection = 'hero';
+      
+      sections.forEach(section => {
+        const element = document.getElementById(section.id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const elementTop = rect.top + scrollY;
+          const elementBottom = elementTop + rect.height;
+          
+          // Calculate how much of the section is visible
+          const visibleTop = Math.max(scrollY, elementTop);
+          const visibleBottom = Math.min(scrollY + windowHeight, elementBottom);
+          const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+          const visibility = visibleHeight / windowHeight;
+          
+          if (visibility > maxVisibility) {
+            maxVisibility = visibility;
+            activeSection = section.id;
+          }
         }
-      }
+      });
+      
+      setCurrentSection(activeSection);
     };
 
     window.addEventListener('scroll', handleScroll);

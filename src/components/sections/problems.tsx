@@ -20,7 +20,7 @@ export function Problems() {
       </div>
 
       {/* Navy Honeycomb Watermark - Actual Image */}
-      <motion.div 
+      <motion.div // HONEYCOMB: Problems section - TOP RIGHT (140px, navy)
         className="absolute top-8 right-8 opacity-15 z-5"
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}

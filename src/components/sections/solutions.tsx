@@ -7,11 +7,11 @@ import { COPY } from "../../lib/constants";
 
 export function Solutions() {
 
-  // Parallax transforms with reduced ranges to prevent clipping
+  // Parallax transforms - matching hero section
   const { scrollY } = useScroll();
-  const honeycombY = useTransform(scrollY, [0, 2000], [0, -100]);
-  const contentY = useTransform(scrollY, [0, 2000], [0, -50]);
-  const floatingObjectsY = useTransform(scrollY, [0, 2000], [0, -150]);
+  const honeycombY = useTransform(scrollY, [0, 800], [0, -150]);
+  const contentY = useTransform(scrollY, [0, 800], [0, -100]);
+  const floatingObjectsY = useTransform(scrollY, [0, 800], [0, -300]);
 
 
   return (
@@ -23,13 +23,13 @@ export function Solutions() {
       {/* RIGHT SIDE - Main Content */}
       <div className="flex-1 bg-mebee-sage relative overflow-visible">
       {/* Navy Honeycomb Watermarks - Multiple for sage background */}
-      <motion.div
+      <motion.div // HONEYCOMB: Solutions main section - TOP LEFT (350px)
         className="absolute z-0"
         style={{
           top: "15%",
           left: "8%",
           width: "350px",
-          height: "350px",
+          aspectRatio: "1",
           backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
@@ -42,24 +42,6 @@ export function Solutions() {
         viewport={{ once: true }}
       />
 
-      <motion.div
-        className="absolute z-0"
-        style={{
-          bottom: "10%",
-          right: "5%",
-          width: "300px",
-          height: "300px",
-          backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          y: honeycombY,
-        }}
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-        viewport={{ once: true }}
-      />
 
       {/* 3 Floating Objects with Different Shapes */}
       <motion.div style={{ y: floatingObjectsY }} className="absolute inset-0">
@@ -282,24 +264,61 @@ export function Solutions() {
           viewport={{ once: true }}
         >
           {/* Honeycomb Background for Demo Section */}
-          <motion.div
+          <motion.div // HONEYCOMB: Three Pillars demo section - FAR RIGHT (450px, partially off-screen)
             className="absolute z-0"
             style={{
-              top: "20%",
-              right: "10%",
-              width: "400px",
-              height: "400px",
+              top: "15%",
+              right: "-5%",
+              width: "450px",
+              aspectRatio: "1",
               backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
               backgroundSize: "contain",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
               y: honeycombY,
+              opacity: 0.3,
             }}
             initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            whileInView={{ opacity: 0.3, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
           />
+
+          {/* Dark Navy Floating Objects on the Left */}
+          <motion.div style={{ y: contentY }} className="absolute inset-0 z-0">
+            {/* Top Left - Wide Rectangle */}
+            <motion.div
+              className="absolute w-32 h-20 bg-mebee-dark-navy/30 z-0"
+              initial={{ x: 50, y: 150, rotate: -12 }}
+              animate={{
+                x: [50, 20, 80, 40, 70, 50],
+                y: [150, 130, 170, 190, 140, 150],
+                rotate: [-12, 3, -25, 8, -15, -12],
+              }}
+              transition={{
+                duration: 28,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+
+            {/* Middle Left - Square */}
+            <motion.div
+              className="absolute w-24 h-24 bg-mebee-dark-navy/20 z-0"
+              initial={{ x: 80, y: 300, rotate: 15 }}
+              animate={{
+                x: [80, 50, 110, 70, 100, 80],
+                y: [300, 270, 330, 310, 280, 300],
+                rotate: [15, 30, -5, 25, 5, 15],
+              }}
+              transition={{
+                duration: 25,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 3,
+              }}
+            />
+          </motion.div>
           <motion.h3 
             className="text-4xl md:text-5xl font-bold text-mebee-dark-navy mb-8 leading-tight font-articulat"
             initial={{ opacity: 0, y: 20 }}
