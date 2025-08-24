@@ -134,7 +134,7 @@ export function ProductShowcase() {
                   Instant Findability
                 </h3>
                 <p className="text-mebee-navy/80 leading-relaxed">
-                  "Show me EU Q4 social assets for Model X in German" → Results in seconds
+                  &ldquo;Show me EU Q4 social assets for Model X in German&rdquo; → Results in seconds
                 </p>
               </div>
             </motion.div>
