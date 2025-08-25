@@ -251,10 +251,9 @@ export function Hero() {
               transition={{ duration: 0.8, delay: 1.4, ease: "easeOut" }}
             >
               <Button
-                variant="outline"
+                variant="cta-primary"
                 size="lg"
                 onClick={openModal}
-                className="border-2 border-mebee-yellow text-mebee-yellow hover:bg-mebee-yellow hover:text-mebee-dark-navy font-semibold px-8 py-4 text-lg min-h-[44px] transition-all duration-200"
               >
                 {COPY.hero.cta}
               </Button>

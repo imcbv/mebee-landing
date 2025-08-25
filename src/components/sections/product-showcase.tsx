@@ -1,14 +1,20 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { Button } from '../ui/button'
+import { Modal } from '../ui/modal'
+import { DemoRequestForm } from '../forms/demo-request'
 
 export function ProductShowcase() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const { scrollY } = useScroll()
   const contentY = useTransform(scrollY, [0, 800], [0, -50])
   const honeycombY = useTransform(scrollY, [0, 800], [0, -100])
+
+  const openModal = () => setIsModalOpen(true)
+  const closeModal = () => setIsModalOpen(false)
 
   return (
     <section id="product-showcase" className="min-h-screen flex overflow-hidden">
@@ -247,15 +253,25 @@ export function ProductShowcase() {
               Book a 15-minute demo to see how these features work with your actual assets and team workflow.
             </p>
             <Button
-              variant="primary"
+              variant="cta-primary"
               size="lg"
-              className="bg-mebee-yellow text-mebee-dark-navy hover:bg-mebee-yellow/90 font-semibold px-8 py-4 text-lg min-h-[44px] transition-all duration-200"
+              onClick={openModal}
             >
-              Book Your Demo
+              Book a short demo
             </Button>
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Demo Request Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title="Book Your Demo"
+        size="lg"
+      >
+        <DemoRequestForm onClose={closeModal} />
+      </Modal>
     </section>
   )
 }

@@ -1,16 +1,23 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "../ui/button";
+import { Modal } from "../ui/modal";
+import { DemoRequestForm } from "../forms/demo-request";
 import { COPY } from "../../lib/constants";
 
 export function FinalCTA() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   // Parallax transforms - matching hero section
   const { scrollY } = useScroll();
   const honeycombY = useTransform(scrollY, [0, 800], [0, -150]);
   const contentY = useTransform(scrollY, [0, 800], [0, -100]);
   const floatingObjectsY = useTransform(scrollY, [0, 800], [0, -300]);
+
+  const openModal = () => setIsModalOpen(true)
+  const closeModal = () => setIsModalOpen(false)
 
   return (
     <section
@@ -150,14 +157,25 @@ export function FinalCTA() {
             viewport={{ once: true }}
           >
             <Button
+              variant="cta-primary"
               size="lg"
-              className="bg-mebee-yellow text-mebee-dark-navy hover:bg-mebee-yellow/90 font-semibold px-12 py-2 text-xl min-h-11 transition-all duration-200 border-2 border-transparent hover:border-white"
+              onClick={openModal}
             >
               {COPY.finalCta.cta}
             </Button>
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Demo Request Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title="Book Your Demo"
+        size="lg"
+      >
+        <DemoRequestForm onClose={closeModal} />
+      </Modal>
     </section>
   );
 }
