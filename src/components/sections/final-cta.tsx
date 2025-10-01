@@ -22,22 +22,22 @@ export function FinalCTA() {
   return (
     <section
       id="final-cta"
-      className="min-h-screen text-mebee-dark-navy flex overflow-hidden"
+      className="min-h-screen text-white flex overflow-hidden"
     >
       {/* LEFT SIDE - Yellow Slab (nav bar width) */}
       <div className="w-20 bg-mebee-yellow relative hidden lg:block"></div>
 
       {/* RIGHT SIDE - Main Content */}
-      <div className="flex-1 bg-mebee-sage relative">
-        {/* Navy Honeycomb Watermarks - Multiple for sage background */}
-        <motion.div // HONEYCOMB: Final CTA section - TOP RIGHT (400px, navy)
+      <div className="flex-1 bg-mebee-dark-navy relative">
+        {/* White Honeycomb Watermarks - for navy background */}
+        <motion.div // HONEYCOMB: Final CTA section - TOP RIGHT (400px, white)
           className="absolute z-5"
           style={{
             top: "-3%",
             right: "-3%",
             width: "400px",
             aspectRatio: "1",
-            backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
+            backgroundImage: 'url("/images/MeBee Honeycomb_white.png")',
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
@@ -49,14 +49,14 @@ export function FinalCTA() {
           viewport={{ once: true }}
         />
 
-        <motion.div // HONEYCOMB: Final CTA section - BOTTOM LEFT (300px, navy)
+        <motion.div // HONEYCOMB: Final CTA section - BOTTOM LEFT (300px, white)
           className="absolute z-5"
           style={{
             bottom: "0%",
             left: "5%",
             width: "300px",
             aspectRatio: "1",
-            backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
+            backgroundImage: 'url("/images/MeBee Honeycomb_white.png")',
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
@@ -133,7 +133,7 @@ export function FinalCTA() {
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight font-articulat"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight font-articulat"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -142,7 +142,7 @@ export function FinalCTA() {
             {COPY.finalCta.headline}
           </motion.h2>
           <motion.p
-            className="text-xl mb-12 text-mebee-dark-navy/80 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl mb-12 text-white/80 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}

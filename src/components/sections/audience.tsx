@@ -17,7 +17,7 @@ export function Audience() {
       <div className="w-20 bg-mebee-yellow relative hidden lg:block"></div>
 
       {/* RIGHT SIDE - Main Content */}
-      <div className="flex-1 bg-mebee-dark-navy relative">
+      <div className="flex-1 bg-mebee-sage relative">
         {/* Navy Honeycomb Watermarks - Multiple for sage background */}
         <motion.div // HONEYCOMB: Audience section - TOP LEFT (350px)
           className="absolute z-0"
@@ -26,7 +26,7 @@ export function Audience() {
             left: "5%",
             width: "350px",
             aspectRatio: "1",
-            backgroundImage: 'url("/images/MeBee Honeycomb_white.png")',
+            backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
@@ -45,7 +45,7 @@ export function Audience() {
             right: "8%",
             width: "300px",
             aspectRatio: "1",
-            backgroundImage: 'url("/images/MeBee Honeycomb_white.png")',
+            backgroundImage: 'url("/images/MeBee Honeycomb_navy.png")',
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
@@ -126,7 +126,7 @@ export function Audience() {
             viewport={{ once: true }}
           >
             <motion.h2
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 font-articulat"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-mebee-dark-navy mb-6 font-articulat"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
@@ -135,7 +135,7 @@ export function Audience() {
               Built For Your Whole Network
             </motion.h2>
             <motion.p
-              className="text-xl text-white/80 max-w-3xl mx-auto"
+              className="text-xl text-mebee-dark-navy/80 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
