@@ -1,10 +1,10 @@
 "use client";
 
-import React from 'react';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { Button } from '../ui/button';
-import { COPY } from '../../lib/constants';
+import React from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Button } from "../ui/button";
+import { COPY } from "../../lib/constants";
 
 export function Problems() {
   return (
@@ -41,7 +41,7 @@ export function Problems() {
       {/* Floating Sage Geometric Elements */}
       <motion.div
         className="absolute w-24 h-16 bg-mebee-sage/20  z-5"
-        style={{ top: '15%', left: '8%' }}
+        style={{ top: "15%", left: "8%" }}
         animate={{
           x: [0, 20, -10, 15, 0],
           y: [0, -15, 25, -5, 0],
@@ -53,10 +53,10 @@ export function Problems() {
           ease: "easeInOut",
         }}
       />
-      
+
       <motion.div
         className="absolute w-16 h-20 bg-mebee-sage/15  z-5"
-        style={{ top: '60%', right: '12%' }}
+        style={{ top: "60%", right: "12%" }}
         animate={{
           x: [0, -25, 15, -10, 0],
           y: [0, 20, -30, 10, 0],
@@ -72,7 +72,7 @@ export function Problems() {
 
       <motion.div
         className="absolute w-20 h-12 bg-mebee-sage/25  z-5"
-        style={{ bottom: '20%', left: '15%' }}
+        style={{ bottom: "20%", left: "15%" }}
         animate={{
           x: [0, 30, -20, 25, 0],
           y: [0, -25, 35, -15, 0],
@@ -88,7 +88,7 @@ export function Problems() {
 
       <div className="max-w-6xl mx-auto px-8 relative">
         {/* Section Header - Typography Focused */}
-        <motion.div 
+        <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -97,7 +97,7 @@ export function Problems() {
         >
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-mebee-dark-navy leading-tight mb-6 font-articulat">
             Stop
-            <motion.span 
+            <motion.span
               className="block text-mebee-yellow"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -106,7 +106,7 @@ export function Problems() {
             >
               delays
             </motion.span>
-            <motion.span 
+            <motion.span
               className="block text-mebee-navy"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -121,26 +121,26 @@ export function Problems() {
         {/* Problems List - Clean Structure with Staggered Animations */}
         <div className="max-w-4xl mx-auto space-y-16 mb-20">
           {COPY.problems.painPoints.map((painPoint, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               className="relative"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ 
-                duration: 0.7, 
+              transition={{
+                duration: 0.7,
                 delay: index * 0.2,
-                ease: "easeOut" 
+                ease: "easeOut",
               }}
               viewport={{ once: true }}
             >
-              <motion.div 
+              <motion.div
                 className="absolute -left-6 top-0 w-1 bg-mebee-yellow"
                 initial={{ height: 0 }}
-                whileInView={{ height: '100%' }}
-                transition={{ 
-                  duration: 0.8, 
-                  delay: (index * 0.2) + 0.3,
-                  ease: "easeOut" 
+                whileInView={{ height: "100%" }}
+                transition={{
+                  duration: 0.8,
+                  delay: index * 0.2 + 0.3,
+                  ease: "easeOut",
                 }}
                 viewport={{ once: true }}
               />
@@ -157,7 +157,7 @@ export function Problems() {
         </div>
 
         {/* Solution Teaser - Clean Centered */}
-        <motion.div 
+        <motion.div
           className="text-center bg-mebee-sage/10  p-12 md:p-16 relative"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -169,26 +169,20 @@ export function Problems() {
             <span className="block text-mebee-yellow">eliminate all three</span>
             bottlenecks?
           </h3>
-          
+
           <p className="text-xl text-mebee-navy/80 mb-12 max-w-3xl mx-auto leading-relaxed">
-            MeBee&apos;s AI-native approach transforms these pain points into your competitive advantages.
+            MeBee&apos;s AI-native approach transforms these pain points into
+            your competitive advantages.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Button 
-              variant="primary" 
+          <div className="flex justify-center">
+            <Button
+              variant="primary"
               size="lg"
               className="bg-mebee-yellow text-mebee-dark-navy hover:bg-mebee-yellow/90 font-semibold px-8 py-4 text-lg min-h-[44px] transition-all duration-200"
+              data-modal="demo-request"
             >
-              See the solution
-            </Button>
-            
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-2 border-mebee-navy text-mebee-navy hover:bg-mebee-navy hover:text-white font-semibold px-8 py-4 text-lg min-h-[44px] transition-all duration-200"
-            >
-              {COPY.problems.secondaryCta}
+              Book a short demo
             </Button>
           </div>
         </motion.div>

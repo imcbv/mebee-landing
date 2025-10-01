@@ -3,11 +3,18 @@
 import React, { useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "../ui/button";
+import { Modal } from "../ui/modal";
+import { DemoRequestForm } from "../forms/demo-request";
 import { COPY } from "../../lib/constants";
 
 export function Problems() {
   // State to cycle through different backgrounds
   const [backgroundOption] = useState(3); // Default to dark navy
+
+  // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   // Parallax transforms - matching hero section
   const { scrollY } = useScroll();
@@ -120,7 +127,8 @@ export function Problems() {
     },
   };
 
-  const config = backgroundConfigs[backgroundOption as keyof typeof backgroundConfigs];
+  const config =
+    backgroundConfigs[backgroundOption as keyof typeof backgroundConfigs];
 
   return (
     <section id="problems" className="min-h-screen flex overflow-hidden">
@@ -220,7 +228,7 @@ export function Problems() {
             viewport={{ once: true }}
           >
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 font-articulat">
-              Stop
+              What Gets
               <motion.span
                 className="block text-mebee-yellow"
                 initial={{ opacity: 0, x: -20 }}
@@ -228,17 +236,17 @@ export function Problems() {
                 transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
                 viewport={{ once: true }}
               >
-                delays
+                in The Way
               </motion.span>
-              <motion.span
+              {/* <motion.span
                 className="block text-white"
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
                 viewport={{ once: true }}
               >
-                Start launches
-              </motion.span>
+                Start launches!
+              </motion.span> */}
             </h2>
           </motion.div>
 
@@ -354,26 +362,28 @@ export function Problems() {
               your competitive advantages.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <div className="flex justify-center">
               <Button
                 variant="primary"
                 size="lg"
                 className="bg-mebee-yellow text-mebee-dark-navy hover:bg-mebee-yellow/90 font-semibold px-8 py-4 text-lg min-h-[44px] transition-all duration-200"
+                onClick={openModal}
               >
-                See the solution
-              </Button>
-
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-2 border-white text-white hover:bg-white hover:text-mebee-dark-navy font-semibold px-8 py-4 text-lg min-h-[44px] transition-all duration-200"
-              >
-                {COPY.problems.secondaryCta}
+                Book a short demo
               </Button>
             </div>
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Demo Request Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title="Book a Demo"
+      >
+        <DemoRequestForm onClose={closeModal} />
+      </Modal>
     </section>
   );
 }

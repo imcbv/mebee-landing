@@ -12,7 +12,7 @@ export const BRAND_ASSETS = {
   },
   honeycombs: {
     gray: "/images/MeBee Honeycomb_gray.png",
-    honeyGlow: "/images/MeBee Honeycomb_honey glow.png", 
+    honeyGlow: "/images/MeBee Honeycomb_honey glow.png",
     navy: "/images/MeBee Honeycomb_navy.png",
     silver: "/images/MeBee Honeycomb_silver.png",
     white: "/images/MeBee Honeycomb_white.png",
@@ -21,49 +21,60 @@ export const BRAND_ASSETS = {
 
 export const COPY = {
   hero: {
-    headline: "AI-Native digital assets platform for global teams",
-    subheadline: "Find the right asset, auto-adapt by market, and package to your partners or teams needs - so launches go live faster, everywhere.",
+    headline: "Your Next Launch, Transformed",
+    subheadline:
+      "Search, adapt, and deliver content to every market, to power faster launches.",
     cta: "Book a short demo",
-    trustSignal: "Built for Luxury/Fashion & Beauty and Consumer Electronics",
+    trustSignal:
+      "Built for Luxury/Fashion & Beauty, Consumer Electronics, and FMCG brands.",
   },
   problems: {
-    sectionTitle: "Stop delays and re-sends. Start launches.",
+    sectionTitle: "What Gets in the Way",
     painPoints: [
       {
-        title: "Findability fails",
-        description: "Teams and partners can't quickly locate the latest, correct asset",
+        title: "Scattered content",
+        description:
+          "Teams and partners lose time searching for approved assets across fragmented systems.",
       },
       {
-        title: "Localization bottlenecks", 
-        description: "Market copy, languages, and formats slow everything down",
+        title: "Slow localization",
+        description:
+          "Adapting copy, formats, and languages for each market delays launches and can create errors.",
       },
       {
-        title: "Packaging & distribution drag",
-        description: "Retailer/dealer specs turn every launch into handwork",
+        title: "Manual packaging",
+        description:
+          "Retailer and dealer specs turn every launch into tedious rework.",
       },
     ],
-    secondaryCta: "Compare your flow (90-sec scorecard)",
+    transitionText: "What if you could eliminate all three bottlenecks?",
+    subText:
+      "MeBee's AI-native approach transforms these pain points into your competitive advantages.",
+    cta: "Book a short demo",
   },
   solutions: {
-    sectionTitle: "What You Get - Three Pillars",
+    sectionTitle: "What You Gain",
     pillars: [
       {
-        title: "Instant Findability",
-        description: "Natural-language & visual search returns the latest approved asset, fast",
-        feature: "Saved intents like \"EU Q4 social for Model X - German & French\"",
-        microCta: "Try the search demo",
+        title: "Unified search",
+        description:
+          "Find any asset or document across DAMs, CMSs, Drives, SharePoint, and internal portals - even inside slides, PDFs, images, videos, or audio files.",
+        feature: "",
+        microCta: "",
       },
       {
-        title: "Machine-First Localization", 
-        description: "Extract on-asset copy; translate/adapt; human-final in one place",
-        feature: "Keep variants in sync across markets and channels",
-        microCta: "See localization flow",
+        title: "Machine-first localization",
+        description:
+          "Extract on-asset copy and adapt it for each market. Keep every version in sync across regions and channels with clear readiness status.",
+        feature: "",
+        microCta: "",
       },
       {
-        title: "Partner-Ready Packaging & Distribution",
-        description: "One click emits retailer/dealer/press kits (crops, codecs, filenames, manifests)",
-        feature: "Smart links your partners can use immediately", 
-        microCta: "View kit example",
+        title: "Instant partner packaging",
+        description:
+          "Create press, dealer, or retailer kits in one click. Permissions carry over from the source, and partners get smart links you can track with logs and audit trails.",
+        feature: "",
+        microCta: "",
       },
     ],
   },
@@ -76,12 +87,14 @@ export const COPY = {
         description: "Describe what you need in plain language",
       },
       {
-        step: "Localize", 
-        description: "Auto-adapt text and formats & approve differences in seconds",
+        step: "Localize",
+        description:
+          "Auto-adapt text and formats & approve differences in seconds",
       },
       {
         step: "Package",
-        description: "Generate partner-ready bundles for each channel and region",
+        description:
+          "Generate partner-ready bundles for each channel and region",
       },
       {
         step: "Share",
@@ -91,28 +104,44 @@ export const COPY = {
     cta: "Book a short demo",
   },
   audience: {
-    sectionTitle: "Target Audience",
+    sectionTitle: "Built For Your Whole Network",
     internalTeams: {
-      title: "Internal teams",
-      teams: ["Brand", "Channel/Trade", "Content Ops", "Dealer/Retail Marketing", "Regional Marketing"],
+      title: "For internal teams",
+      teams: [
+        "Brand",
+        "Channel/Trade",
+        "Content Ops",
+        "Dealer/Retail Marketing",
+        "Regional Marketing",
+      ],
     },
     externalNetworks: {
-      title: "External networks", 
-      networks: ["Dealers", "retailers/marketplaces", "distributors", "agencies", "press/influencers"],
+      title: "For external networks",
+      networks: [
+        "Dealers",
+        "Retailers",
+        "Marketplaces",
+        "Distributors",
+        "Agencies",
+        "Press",
+        "Influencers",
+      ],
     },
   },
   finalCta: {
-    headline: "Ready to end the file hunt and ship faster in every market?",
+    headline:
+      "Ready to launch smarter, and transform how content moves across every market?",
     cta: "Book a short demo",
   },
   brand: {
     corePromise: "Find smarter, share better",
     valueProps: [
       "Instant findability",
-      "machine-first localization", 
-      "partner-ready packaging"
+      "machine-first localization",
+      "partner-ready packaging",
     ],
-    differentiator: "AI-native approach vs. legacy DAM systems that require manual metadata",
+    differentiator:
+      "AI-native approach vs. legacy DAM systems that require manual metadata",
   },
 } as const;
 
@@ -121,7 +150,7 @@ export const FONT_CONFIG = {
   fallbacks: ["Inter", "sans-serif"],
   css: {
     fontFamily: "articulat-cf, sans-serif",
-    fontStyle: "normal", 
+    fontStyle: "normal",
     fontWeight: "100",
   },
 } as const;

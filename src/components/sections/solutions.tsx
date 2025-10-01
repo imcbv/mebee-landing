@@ -1,445 +1,481 @@
 "use client";
 
-import React from "react";
-import Image from 'next/image';
+import React, { useState } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "../ui/button";
+import { Modal } from "../ui/modal";
+import { DemoRequestForm } from "../forms/demo-request";
 import { COPY } from "../../lib/constants";
 
 export function Solutions() {
-
+  // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   // Parallax transforms - matching hero section
   const { scrollY } = useScroll();
   const honeycombY = useTransform(scrollY, [0, 800], [0, -150]);
   const contentY = useTransform(scrollY, [0, 800], [0, -100]);
   const floatingObjectsY = useTransform(scrollY, [0, 800], [0, -300]);
 
-
   return (
     <section id="solutions" className="min-h-screen overflow-hidden flex">
       {/* LEFT SIDE - Yellow Slab (nav bar width) */}
-      <div className="w-20 bg-mebee-yellow relative hidden lg:block">
-      </div>
+      <div className="w-20 bg-mebee-yellow relative hidden lg:block"></div>
 
       {/* RIGHT SIDE - Main Content */}
       <div className="flex-1 bg-mebee-sage relative overflow-visible">
-      {/* Navy Honeycomb Watermarks - Multiple for sage background */}
-      <motion.div // HONEYCOMB: Solutions main section - TOP LEFT (350px)
-        className="absolute z-0 w-[350px] aspect-square"
-        style={{
-          top: "15%",
-          left: "8%",
-          y: honeycombY,
-        }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ once: true }}
-      >
-        <Image
-          src="/images/MeBee Honeycomb_navy.png"
-          alt="MeBee Honeycomb Pattern"
-          fill
-          sizes="350px"
-          style={{ objectFit: "contain", objectPosition: "center" }}
-          loading="lazy"
-        />
-      </motion.div>
-
-
-      {/* 3 Floating Objects with Different Shapes */}
-      <motion.div style={{ y: floatingObjectsY }} className="absolute inset-0">
-        {/* Top Right - Wide Rectangle */}
-        <motion.div
-          className="absolute w-28 h-16 bg-mebee-yellow/70 z-10"
-          initial={{ x: 650, y: 100, rotate: 15 }}
-          animate={{
-            x: [650, 600, 700, 630, 680, 650],
-            y: [100, 80, 140, 180, 90, 100],
-            rotate: [15, 30, -5, 25, 10, 15],
+        {/* Navy Honeycomb Watermarks - Multiple for sage background */}
+        <motion.div // HONEYCOMB: Solutions main section - TOP LEFT (350px)
+          className="absolute z-0 w-[350px] aspect-square"
+          style={{
+            top: "15%",
+            left: "8%",
+            y: honeycombY,
           }}
-          transition={{
-            duration: 22,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-
-        {/* Middle Left - Square */}
-        <motion.div
-          className="absolute w-24 h-24 bg-mebee-yellow/50 z-10"
-          initial={{ x: 80, y: 400, rotate: -10 }}
-          animate={{
-            x: [80, 30, 130, 60, 110, 80],
-            y: [400, 360, 440, 380, 420, 400],
-            rotate: [-10, 18, -25, 12, -8, -10],
-          }}
-          transition={{
-            duration: 26,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 4,
-          }}
-        />
-
-        {/* Bottom Right - Tall Rectangle */}
-        <motion.div
-          className="absolute w-20 h-32 bg-mebee-yellow/60 z-10"
-          initial={{ x: 720, y: 600, rotate: 8 }}
-          animate={{
-            x: [720, 670, 770, 740, 690, 720],
-            y: [600, 560, 640, 580, 620, 600],
-            rotate: [8, 25, -12, 20, 3, 8],
-          }}
-          transition={{
-            duration: 24,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 7,
-          }}
-        />
-      </motion.div>
-
-      <motion.div
-        className="max-w-6xl mx-auto px-8 relative min-h-screen flex flex-col justify-center"
-        style={{ y: contentY }}
-      >
-
-        {/* Section Header */}
-        <motion.div
-          className="text-center mb-20 pt-32"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
         >
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-mebee-dark-navy leading-tight mb-6 font-articulat">
-            What You Get
-            <motion.span
-              className="block text-mebee-yellow"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-              viewport={{ once: true }}
-            >
-              Three Pillars
-            </motion.span>
-          </h2>
-          <motion.p
-            className="text-xl text-mebee-dark-navy max-w-3xl mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
-            Transform your biggest pain points into competitive advantages
-          </motion.p>
+          <Image
+            src="/images/MeBee Honeycomb_navy.png"
+            alt="MeBee Honeycomb Pattern"
+            fill
+            sizes="350px"
+            style={{ objectFit: "contain", objectPosition: "center" }}
+            loading="lazy"
+          />
         </motion.div>
 
-        {/* Three Pillars - Clean Cards */}
-        <motion.div 
-          className="grid md:grid-cols-3 gap-8 mb-20 relative z-20"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
+        {/* 3 Floating Objects with Different Shapes */}
+        <motion.div
+          style={{ y: floatingObjectsY }}
+          className="absolute inset-0"
         >
-          {/* Pillar 1 */}
-          <motion.div 
-            className="bg-white p-8 shadow-lg flex flex-col h-full"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -2, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)" }}
-            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
-            <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-mebee-yellow rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-mebee-dark-navy">
-                  01
-                </span>
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-mebee-dark-navy mb-4 font-articulat">
-                {COPY.solutions.pillars[0].title}
-              </h3>
-            </div>
-
-            <p className="text-mebee-navy/80 leading-relaxed mb-6">
-              {COPY.solutions.pillars[0].description}
-            </p>
-
-            <div className="bg-mebee-navy/10 p-4 border-l-4 border-mebee-navy mb-6 flex-grow">
-              <p className="text-sm text-mebee-dark-navy font-medium">
-                ✨ {COPY.solutions.pillars[0].feature}
-              </p>
-            </div>
-
-            <Button
-              variant="outline"
-              className="w-full border-2 border-mebee-dark-navy text-mebee-dark-navy hover:bg-mebee-dark-navy hover:text-white font-semibold transition-all duration-200 min-h-[44px] mt-auto"
-            >
-              {COPY.solutions.pillars[0].microCta}
-            </Button>
-          </motion.div>
-
-          {/* Pillar 2 */}
-          <motion.div 
-            className="bg-white p-8 shadow-lg flex flex-col h-full"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -2, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)" }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
-            <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-mebee-yellow rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-mebee-dark-navy">
-                  02
-                </span>
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-mebee-dark-navy mb-4 font-articulat">
-                {COPY.solutions.pillars[1].title}
-              </h3>
-            </div>
-
-            <p className="text-mebee-navy/80 leading-relaxed mb-6">
-              {COPY.solutions.pillars[1].description}
-            </p>
-
-            <div className="bg-mebee-navy/10 p-4 border-l-4 border-mebee-navy mb-6 flex-grow">
-              <p className="text-sm text-mebee-dark-navy font-medium">
-                🔄 {COPY.solutions.pillars[1].feature}
-              </p>
-            </div>
-
-            <Button
-              variant="outline"
-              className="w-full border-2 border-mebee-dark-navy text-mebee-dark-navy hover:bg-mebee-dark-navy hover:text-white font-semibold transition-all duration-200 min-h-[44px] mt-auto"
-            >
-              {COPY.solutions.pillars[1].microCta}
-            </Button>
-          </motion.div>
-
-          {/* Pillar 3 */}
-          <motion.div 
-            className="bg-white p-8 shadow-lg flex flex-col h-full"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -2, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)" }}
-            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
-            <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-mebee-yellow rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-mebee-dark-navy">
-                  03
-                </span>
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-mebee-dark-navy mb-4 font-articulat">
-                {COPY.solutions.pillars[2].title}
-              </h3>
-            </div>
-
-            <p className="text-mebee-navy/80 leading-relaxed mb-6">
-              {COPY.solutions.pillars[2].description}
-            </p>
-
-            <div className="bg-mebee-navy/10 p-4 border-l-4 border-mebee-navy mb-6 flex-grow">
-              <p className="text-sm text-mebee-dark-navy font-medium">
-                🚀 {COPY.solutions.pillars[2].feature}
-              </p>
-            </div>
-
-            <Button
-              variant="outline"
-              className="w-full border-2 border-mebee-dark-navy text-mebee-dark-navy hover:bg-mebee-dark-navy hover:text-white font-semibold transition-all duration-200 min-h-[44px] mt-auto"
-            >
-              {COPY.solutions.pillars[2].microCta}
-            </Button>
-          </motion.div>
-        </motion.div>
-
-        {/* Before/After Demo Section */}
-        <motion.div 
-          className="text-center bg-white/10 backdrop-blur-sm p-12 relative z-20"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-        >
-          {/* Honeycomb Background for Demo Section */}
-          <motion.div // HONEYCOMB: Three Pillars demo section - FAR RIGHT (450px, partially off-screen)
-            className="absolute z-0 w-[450px] aspect-square opacity-30"
-            style={{
-              top: "15%",
-              right: "-5%",
-              y: honeycombY,
+          {/* Top Right - Wide Rectangle */}
+          <motion.div
+            className="absolute w-28 h-16 bg-mebee-yellow/70 z-10"
+            initial={{ x: 650, y: 100, rotate: 15 }}
+            animate={{
+              x: [650, 600, 700, 630, 680, 650],
+              y: [100, 80, 140, 180, 90, 100],
+              rotate: [15, 30, -5, 25, 10, 15],
             }}
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 0.3, scale: 1 }}
+            transition={{
+              duration: 22,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+
+          {/* Middle Left - Square */}
+          <motion.div
+            className="absolute w-24 h-24 bg-mebee-yellow/50 z-10"
+            initial={{ x: 80, y: 400, rotate: -10 }}
+            animate={{
+              x: [80, 30, 130, 60, 110, 80],
+              y: [400, 360, 440, 380, 420, 400],
+              rotate: [-10, 18, -25, 12, -8, -10],
+            }}
+            transition={{
+              duration: 26,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 4,
+            }}
+          />
+
+          {/* Bottom Right - Tall Rectangle */}
+          <motion.div
+            className="absolute w-20 h-32 bg-mebee-yellow/60 z-10"
+            initial={{ x: 720, y: 600, rotate: 8 }}
+            animate={{
+              x: [720, 670, 770, 740, 690, 720],
+              y: [600, 560, 640, 580, 620, 600],
+              rotate: [8, 25, -12, 20, 3, 8],
+            }}
+            transition={{
+              duration: 24,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 7,
+            }}
+          />
+        </motion.div>
+
+        <motion.div
+          className="max-w-6xl mx-auto px-8 relative min-h-screen flex flex-col justify-center"
+          style={{ y: contentY }}
+        >
+          {/* Section Header */}
+          <motion.div
+            className="text-center mb-20 pt-32"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
           >
-            <Image
-              src="/images/MeBee Honeycomb_navy.png"
-              alt="MeBee Honeycomb Pattern"
-              fill
-              sizes="450px"
-              style={{ objectFit: "contain", objectPosition: "center" }}
-              loading="lazy"
-            />
-          </motion.div>
-
-          {/* Dark Navy Floating Objects on the Left */}
-          <motion.div style={{ y: contentY }} className="absolute inset-0 z-0">
-            {/* Top Left - Wide Rectangle */}
-            <motion.div
-              className="absolute w-32 h-20 bg-mebee-dark-navy/30 z-0"
-              initial={{ x: 50, y: 150, rotate: -12 }}
-              animate={{
-                x: [50, 20, 80, 40, 70, 50],
-                y: [150, 130, 170, 190, 140, 150],
-                rotate: [-12, 3, -25, 8, -15, -12],
-              }}
-              transition={{
-                duration: 28,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-
-            {/* Middle Left - Square */}
-            <motion.div
-              className="absolute w-24 h-24 bg-mebee-dark-navy/20 z-0"
-              initial={{ x: 80, y: 300, rotate: 15 }}
-              animate={{
-                x: [80, 50, 110, 70, 100, 80],
-                y: [300, 270, 330, 310, 280, 300],
-                rotate: [15, 30, -5, 25, 5, 15],
-              }}
-              transition={{
-                duration: 25,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 3,
-              }}
-            />
-          </motion.div>
-          <motion.h3 
-            className="text-4xl md:text-5xl font-bold text-mebee-dark-navy mb-8 leading-tight font-articulat"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
-            Ready to see all
-            <span className="block text-mebee-yellow">three pillars</span>
-            in action?
-          </motion.h3>
-
-          <motion.p 
-            className="text-xl text-mebee-dark-navy mb-12 max-w-3xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
-            Experience how MeBee transforms your asset management workflow from
-            bottleneck to breakthrough.
-          </motion.p>
-
-          {/* Simple Before/After */}
-          <motion.div 
-            className="grid md:grid-cols-3 gap-8 items-center mb-12 max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
-            <div className="text-center">
-              <div className="bg-white p-6 shadow-md mb-4">
-                <div className="w-12 h-12 bg-mebee-navy/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <svg
-                    className="w-6 h-6 text-mebee-navy"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </div>
-                <h4 className="font-semibold text-mebee-dark-navy">
-                  Before MeBee
-                </h4>
-                <p className="text-sm text-mebee-navy/70">
-                  Manual, slow, frustrating
-                </p>
-              </div>
-            </div>
-
-            <div className="flex justify-center">
-              <div className="w-12 h-12 bg-mebee-yellow rounded-full flex items-center justify-center">
-                <span className="text-mebee-dark-navy text-xl font-bold">
-                  →
-                </span>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-white p-6 shadow-md mb-4">
-                <div className="w-12 h-12 bg-mebee-dark-navy rounded-full flex items-center justify-center mx-auto mb-2">
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </div>
-                <h4 className="font-semibold text-mebee-dark-navy">With MeBee</h4>
-                <p className="text-sm text-mebee-navy/70">
-                  AI-powered, instant, seamless
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
-            <Button
-              variant="primary"
-              size="lg"
-              className="bg-mebee-yellow text-mebee-dark-navy hover:bg-mebee-yellow/90 font-semibold px-8 py-4 text-lg min-h-[44px] transition-all duration-200"
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-mebee-dark-navy leading-tight mb-6 font-articulat">
+              What You Gain
+              <motion.span
+                className="block text-mebee-yellow"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+                viewport={{ once: true }}
+              >
+                Three Pillars
+              </motion.span>
+            </h2>
+            <motion.p
+              className="text-xl text-mebee-dark-navy max-w-3xl mx-auto"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+              viewport={{ once: true }}
             >
-              See Full Demo
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-mebee-dark-navy text-mebee-dark-navy hover:bg-mebee-dark-navy hover:text-white font-semibold px-8 py-4 text-lg min-h-[44px] transition-all duration-200"
+              Transform your biggest pain points into competitive advantages
+            </motion.p>
+          </motion.div>
+
+          {/* Three Pillars - Clean Cards */}
+          <motion.div
+            className="grid md:grid-cols-3 gap-8 mb-20 relative z-20"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
+            {/* Pillar 1 */}
+            <motion.div
+              className="bg-white p-8 shadow-lg flex flex-col h-full"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{
+                y: -2,
+                boxShadow:
+                  "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+              }}
+              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+              viewport={{ once: true }}
             >
-              Compare Solutions
-            </Button>
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-mebee-yellow rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl font-bold text-mebee-dark-navy">
+                    01
+                  </span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-mebee-dark-navy mb-4 font-articulat">
+                  {COPY.solutions.pillars[0].title}
+                </h3>
+              </div>
+
+              <p className="text-mebee-navy/80 leading-relaxed mb-6">
+                {COPY.solutions.pillars[0].description}
+              </p>
+
+              {COPY.solutions.pillars[0].feature && (
+                <div className="bg-mebee-navy/10 p-4 border-l-4 border-mebee-navy mb-6 flex-grow">
+                  <p className="text-sm text-mebee-dark-navy font-medium">
+                    ✨ {COPY.solutions.pillars[0].feature}
+                  </p>
+                </div>
+              )}
+
+              {COPY.solutions.pillars[0].microCta && (
+                <Button
+                  variant="outline"
+                  className="w-full border-2 border-mebee-dark-navy text-mebee-dark-navy hover:bg-mebee-dark-navy hover:text-white font-semibold transition-all duration-200 min-h-[44px] mt-auto"
+                >
+                  {COPY.solutions.pillars[0].microCta}
+                </Button>
+              )}
+            </motion.div>
+
+            {/* Pillar 2 */}
+            <motion.div
+              className="bg-white p-8 shadow-lg flex flex-col h-full"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{
+                y: -2,
+                boxShadow:
+                  "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+              }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-mebee-yellow rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl font-bold text-mebee-dark-navy">
+                    02
+                  </span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-mebee-dark-navy mb-4 font-articulat">
+                  {COPY.solutions.pillars[1].title}
+                </h3>
+              </div>
+
+              <p className="text-mebee-navy/80 leading-relaxed mb-6">
+                {COPY.solutions.pillars[1].description}
+              </p>
+
+              {COPY.solutions.pillars[1].feature && (
+                <div className="bg-mebee-navy/10 p-4 border-l-4 border-mebee-navy mb-6 flex-grow">
+                  <p className="text-sm text-mebee-dark-navy font-medium">
+                    🔄 {COPY.solutions.pillars[1].feature}
+                  </p>
+                </div>
+              )}
+
+              {COPY.solutions.pillars[1].microCta && (
+                <Button
+                  variant="outline"
+                  className="w-full border-2 border-mebee-dark-navy text-mebee-dark-navy hover:bg-mebee-dark-navy hover:text-white font-semibold transition-all duration-200 min-h-[44px] mt-auto"
+                >
+                  {COPY.solutions.pillars[1].microCta}
+                </Button>
+              )}
+            </motion.div>
+
+            {/* Pillar 3 */}
+            <motion.div
+              className="bg-white p-8 shadow-lg flex flex-col h-full"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{
+                y: -2,
+                boxShadow:
+                  "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+              }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-mebee-yellow rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl font-bold text-mebee-dark-navy">
+                    03
+                  </span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-mebee-dark-navy mb-4 font-articulat">
+                  {COPY.solutions.pillars[2].title}
+                </h3>
+              </div>
+
+              <p className="text-mebee-navy/80 leading-relaxed mb-6">
+                {COPY.solutions.pillars[2].description}
+              </p>
+
+              {COPY.solutions.pillars[2].feature && (
+                <div className="bg-mebee-navy/10 p-4 border-l-4 border-mebee-navy mb-6 flex-grow">
+                  <p className="text-sm text-mebee-dark-navy font-medium">
+                    🚀 {COPY.solutions.pillars[2].feature}
+                  </p>
+                </div>
+              )}
+
+              {COPY.solutions.pillars[2].microCta && (
+                <Button
+                  variant="outline"
+                  className="w-full border-2 border-mebee-dark-navy text-mebee-dark-navy hover:bg-mebee-dark-navy hover:text-white font-semibold transition-all duration-200 min-h-[44px] mt-auto"
+                >
+                  {COPY.solutions.pillars[2].microCta}
+                </Button>
+              )}
+            </motion.div>
+          </motion.div>
+
+          {/* Before/After Demo Section */}
+          <motion.div
+            className="text-center bg-white/10 backdrop-blur-sm p-12 relative z-20"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
+            {/* Honeycomb Background for Demo Section */}
+            <motion.div // HONEYCOMB: Three Pillars demo section - FAR RIGHT (450px, partially off-screen)
+              className="absolute z-0 w-[450px] aspect-square opacity-30"
+              style={{
+                top: "15%",
+                right: "-5%",
+                y: honeycombY,
+              }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 0.3, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <Image
+                src="/images/MeBee Honeycomb_navy.png"
+                alt="MeBee Honeycomb Pattern"
+                fill
+                sizes="450px"
+                style={{ objectFit: "contain", objectPosition: "center" }}
+                loading="lazy"
+              />
+            </motion.div>
+
+            {/* Dark Navy Floating Objects on the Left */}
+            <motion.div
+              style={{ y: contentY }}
+              className="absolute inset-0 z-0"
+            >
+              {/* Top Left - Wide Rectangle */}
+              <motion.div
+                className="absolute w-32 h-20 bg-mebee-dark-navy/30 z-0"
+                initial={{ x: 50, y: 150, rotate: -12 }}
+                animate={{
+                  x: [50, 20, 80, 40, 70, 50],
+                  y: [150, 130, 170, 190, 140, 150],
+                  rotate: [-12, 3, -25, 8, -15, -12],
+                }}
+                transition={{
+                  duration: 28,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+
+              {/* Middle Left - Square */}
+              <motion.div
+                className="absolute w-24 h-24 bg-mebee-dark-navy/20 z-0"
+                initial={{ x: 80, y: 300, rotate: 15 }}
+                animate={{
+                  x: [80, 50, 110, 70, 100, 80],
+                  y: [300, 270, 330, 310, 280, 300],
+                  rotate: [15, 30, -5, 25, 5, 15],
+                }}
+                transition={{
+                  duration: 25,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 3,
+                }}
+              />
+            </motion.div>
+            <motion.h3
+              className="text-4xl md:text-5xl font-bold text-mebee-dark-navy mb-8 leading-tight font-articulat"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              Ready to see all
+              <span className="block text-mebee-yellow">three pillars</span>
+              in action?
+            </motion.h3>
+
+            <motion.p
+              className="text-xl text-mebee-dark-navy mb-12 max-w-3xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              Experience how MeBee transforms your asset management workflow
+              from bottleneck to breakthrough.
+            </motion.p>
+
+            {/* Simple Before/After */}
+            <motion.div
+              className="grid md:grid-cols-3 gap-8 items-center mb-12 max-w-4xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <div className="text-center">
+                <div className="bg-white p-6 shadow-md mb-4">
+                  <div className="w-12 h-12 bg-mebee-navy/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <svg
+                      className="w-6 h-6 text-mebee-navy"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </div>
+                  <h4 className="font-semibold text-mebee-dark-navy">
+                    Before MeBee
+                  </h4>
+                  <p className="text-sm text-mebee-navy/70">
+                    Manual, slow, frustrating
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex justify-center">
+                <div className="w-12 h-12 bg-mebee-yellow rounded-full flex items-center justify-center">
+                  <span className="text-mebee-dark-navy text-xl font-bold">
+                    →
+                  </span>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <div className="bg-white p-6 shadow-md mb-4">
+                  <div className="w-12 h-12 bg-mebee-dark-navy rounded-full flex items-center justify-center mx-auto mb-2">
+                    <svg
+                      className="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </div>
+                  <h4 className="font-semibold text-mebee-dark-navy">
+                    With MeBee
+                  </h4>
+                  <p className="text-sm text-mebee-navy/70">
+                    AI-powered, instant, seamless
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="flex justify-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <Button
+                variant="primary"
+                size="lg"
+                className="bg-mebee-yellow text-mebee-dark-navy hover:bg-mebee-yellow/90 font-semibold px-8 py-4 text-lg min-h-[44px] transition-all duration-200"
+                onClick={openModal}
+              >
+                Book a short demo
+              </Button>
+            </motion.div>
           </motion.div>
         </motion.div>
-      </motion.div>
       </div>
+
+      {/* Demo Request Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title="Book a Demo"
+      >
+        <DemoRequestForm onClose={closeModal} />
+      </Modal>
     </section>
   );
 }
