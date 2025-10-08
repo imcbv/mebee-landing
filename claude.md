@@ -1,5 +1,13 @@
 # MeBee Landing Page Project
 
+## TEMPORARY LANDING PAGE ACTIVE
+
+**Current Status**: Temporary "Coming Soon" page is active
+- **To restore full landing page**: Rename `src/app/page-full.tsx` back to `src/app/page.tsx`
+- **To keep temporary page**: Leave as is
+
+The full landing page is preserved in `src/app/page-full.tsx` and can be restored at any time.
+
 ## Project Overview
 
 This is a Next.js TypeScript project for MeBee's marketing landing page. MeBee is an AI-native digital asset management platform designed for global marketing and sales teams.
