@@ -1,23 +1,23 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 export default function ComingSoonPage() {
   return (
     <div
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
       style={{
-        backgroundImage: 'url(/images/MB_LaunchingSoon_background.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
+        backgroundImage: "url(/images/MB_LaunchingSoon_background.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
       <div
         className="flex flex-col items-center justify-center px-4 py-20"
         style={{
-          backgroundColor: 'rgba(147, 165, 160, 0.95)',
-          minWidth: '80%',
-          minHeight: '60vh',
-          maxWidth: '1000px'
+          backgroundColor: "rgba(147, 165, 160, 0.95)",
+          minWidth: "80%",
+          minHeight: "60vh",
+          maxWidth: "1000px",
         }}
       >
         <div className="mb-16">
@@ -37,7 +37,7 @@ export default function ComingSoonPage() {
           <span className="text-white"> is Coming</span>
         </h1>
 
-        <p className="text-2xl md:text-3xl text-white font-light text-center mb-20">
+        <p className="text-2xl md:text-3xl text-white font-light text-center mb-8">
           Launching Soon
         </p>
       </div>
