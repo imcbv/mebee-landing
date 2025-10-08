@@ -31,13 +31,13 @@ export default function ComingSoonPage() {
           />
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-semibold mb-32 text-center">
+        <h1 className="text-5xl md:text-7xl font-semibold mb-32 text-center font-articulat">
           <span className="text-white">Something </span>
           <span className="text-mebee-yellow">Beeg</span>
           <span className="text-white"> is Coming</span>
         </h1>
 
-        <p className="text-2xl md:text-3xl text-white font-light text-center mb-8">
+        <p className="text-2xl md:text-3xl text-white font-light text-center mb-8 font-articulat">
           Launching Soon
         </p>
       </div>
