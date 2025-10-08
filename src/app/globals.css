@@ -1,5 +1,5 @@
 /* Load Articulat CF font first */
-@import url("https://use.typekit.net/qur8hjb.css") layer(fonts);
+@import url("https://use.typekit.net/qur8hjb.css");
 
 @import "tailwindcss";
 
@@ -15,7 +15,7 @@
   --foreground: #252B48;
   
   /* Font Variables */
-  --font-articulat: 'articulat-cf', 'Inter', system-ui, sans-serif;
+  --font-articulat: "articulat-cf", "Articulat CF", 'Inter', system-ui, sans-serif;
 }
 
 @theme {

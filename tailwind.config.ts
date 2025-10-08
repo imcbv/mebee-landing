@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        'articulat': ['articulat-cf', 'Inter', 'system-ui', 'sans-serif'],
-        'sans': ['articulat-cf', 'Inter', 'system-ui', 'sans-serif'],
+        'articulat': ['"articulat-cf"', '"Articulat CF"', 'Inter', 'system-ui', 'sans-serif'],
+        'sans': ['"articulat-cf"', '"Articulat CF"', 'Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
         'mebee-yellow': '#F5FF00',
