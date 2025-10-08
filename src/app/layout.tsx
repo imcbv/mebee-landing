@@ -12,7 +12,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://mebee.com'),
   title: {
-    default: "MeBee | AI-Native Digital Assets Platform for Global Teams",
+    default: "MeBee – Launching Soon",
     template: "%s | MeBee"
   },
   description: "Find the right asset, auto-adapt by market, and package to your partners or teams needs - so launches go live faster, everywhere. Built for Luxury/Fashion & Beauty and Consumer Electronics.",
