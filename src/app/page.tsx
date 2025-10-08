@@ -12,7 +12,7 @@ export default function ComingSoonPage() {
       }}
     >
       <div
-        className="flex flex-col items-center justify-center px-4 py-20"
+        className="flex flex-col items-center justify-center px-4 py-8 md:py-20 mx-4 md:mx-8"
         style={{
           backgroundColor: "rgba(147, 165, 160, 0.95)",
           minWidth: "80%",
@@ -37,7 +37,7 @@ export default function ComingSoonPage() {
           <span className="text-white"> is Coming</span>
         </h1>
 
-        <p className="text-2xl md:text-3xl text-white font-light text-center mb-8 font-articulat">
+        <p className="text-2xl md:text-3xl text-white font-light text-center mb-4 md:mb-8 font-articulat">
           Launching Soon
         </p>
       </div>
