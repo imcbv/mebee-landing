@@ -31,7 +31,7 @@ export default function ComingSoonPage() {
           />
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-semibold mb-32 text-center font-articulat">
+        <h1 className="text-5xl md:text-7xl font-demibold mb-32 text-center font-articulat">
           <span className="text-white">Something </span>
           <span className="text-mebee-yellow">Beeg</span>
           <span className="text-white"> is Coming</span>
