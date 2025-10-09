@@ -11,6 +11,17 @@ export default function ComingSoonPage() {
         backgroundRepeat: "no-repeat",
       }}
     >
+      {/* Static image version as per designer request */}
+      <Image
+        src="/images/MB_LaunchingSoon_.png"
+        alt="Something Beeg is Coming"
+        width={1000}
+        height={600}
+        priority
+        className="w-auto h-auto max-w-[90%] max-h-[80vh]"
+      />
+
+      {/* Dynamic version - commented out for now
       <div
         className="flex flex-col items-center justify-center px-4 py-8 md:py-20 mx-4 md:mx-8"
         style={{
@@ -41,6 +52,7 @@ export default function ComingSoonPage() {
           Launching Soon
         </p>
       </div>
+      */}
     </div>
   );
 }
